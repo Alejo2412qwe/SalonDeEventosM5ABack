@@ -1,0 +1,67 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.m5a.salon.controller;
+
+import com.m5a.salon.model.entity.Reserva;
+import com.m5a.salon.service.ReservaService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ *
+ * @author LaptopSA
+ */
+@RestController
+@RequestMapping("/reserva")
+public class ReservaController {
+
+    @Autowired
+    public ReservaService reservaService;
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<Reserva>> listarReservaciones() {
+        return new ResponseEntity<>(reservaService.findByAll(), HttpStatus.OK);
+    }
+
+    @PostMapping("/crear")
+    public ResponseEntity<Reserva> crearReservaciones(@RequestBody Reserva r) {
+        return new ResponseEntity<>(reservaService.save(r), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Reserva> actualizarReservaciones(@PathVariable Integer id, @RequestBody Reserva r) {
+        Reserva reserva = reservaService.findById(id);
+        if (reserva != null) {
+            try {
+                reserva.setComprobante(r.getComprobante());
+                reserva.setEstado(r.isEstado());
+                reserva.setReCotiId(r.getReCotiId());
+
+                return new ResponseEntity<>(reservaService.save(reserva), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Reserva> elimiarReservaciones(@PathVariable Integer id) {
+        reservaService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+}
