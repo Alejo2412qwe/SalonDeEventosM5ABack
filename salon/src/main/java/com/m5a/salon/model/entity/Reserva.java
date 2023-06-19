@@ -10,9 +10,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import java.io.Serializable;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,20 +28,28 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "Reserva")
 @NoArgsConstructor
-public class Reserva{
+public class Reserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reId")
-    private int reId;
+    @Column(name = "reservaId")
+    private int resId;
 
-    @Column(name = "reEstado")
-    private boolean estado;
+    @Column(name = "resEstado")
+    private boolean resEstado;
 
-    @Column(name = "reComprobante")
-    private String comprobante;
+    @Column(name = "resComprobante")
+    private String resComprobante;
+
+    @Column(name = "resFechaRegistro")
+    private Timestamp resFechaRegistro;
 
     @OneToOne
     @JoinColumn(name = "reCotiId")
     private Cotizacion reCotiId;
+
+    @ManyToOne
+    @JoinColumn(name = "rolId", referencedColumnName = "rolId")
+    private Usuario usuario;
+
 }

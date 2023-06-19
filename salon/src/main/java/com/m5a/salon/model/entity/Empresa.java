@@ -4,15 +4,16 @@
  */
 package com.m5a.salon.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.sql.Timestamp;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -25,26 +26,39 @@ import lombok.Setter;
  */
 @Entity
 @AllArgsConstructor
-@Table(name = "Adicionales")
+@Table(name = "Empresa")
 @NoArgsConstructor
-@Data
-public class Adicionales {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "adiId")
-    private int adiId;
+public class Empresa {
 
     @Setter
     @Getter
-    @Column(name = "adiFechaRegistro")
-    private Timestamp adiFechaRegistro;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "empId")
+    private int empId;
 
-    @ManyToOne
-    @JoinColumn(name = "cotiId", referencedColumnName = "cotiId")
-    private Cotizacion cotizacion;
+    @Setter
+    @Getter
+    @Column(name = "empNombre")
+    private String empNombre;
 
-    @ManyToOne
-    @JoinColumn(name = "prodId", referencedColumnName = "prodId")
-    private ProductoServicio productoServicio;
+    @Setter
+    @Getter
+    @Column(name = "empTelefono")
+    private String empTelefono;
+
+    @Setter
+    @Getter
+    @Column(name = "empEmail")
+    private String empEmail;
+
+    @Setter
+    @Getter
+    @Column(name = "empFechaRegistro")
+    private Timestamp empFechaRegistro;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "empresa")
+    private List<Salon> listaSalones;
+
 }

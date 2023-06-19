@@ -15,11 +15,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,47 +43,47 @@ public class Cotizacion {
     @Getter
     @Setter
     @Column(name = "cotiTipoEvento")
-    private String tipoevento;
+    private String cotiTipoEvento;
 
     @Getter
     @Setter
     @Column(name = "cotiFechaEvento")
-    private Date fechaevento;
+    private Date cotiFechaEvento;
 
     @Getter
     @Setter
-    @Column(name = "cotiDescipcion")
-    private String descripcion;
+    @Column(name = "cotiDescripcion")
+    private String cotiDescripcion;
 
     @Getter
     @Setter
     @Column(name = "cotiEstado")
-    private boolean estado;
+    private boolean cotiEstado;
 
     @Getter
     @Setter
     @Column(name = "cotiMonto")
-    private double monto;
-
-    @Getter
-    @Setter
-    @Column(name = "cotiFecha")
-    private Date fecha;
+    private double cotiMonto;
 
     @Getter
     @Setter
     @Column(name = "cotiHoraFin")
-    private Date horafin;
+    private Date cotiHoraFin;
 
     @Getter
     @Setter
     @Column(name = "cotiHoraInicio")
-    private Date horainicio;
+    private Date cotiHoraInicio;
+
+    @Getter
+    @Setter
+    @Column(name = "cotiFechaRegistro")
+    private Timestamp cotiFechaRegistro;
 
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "salonId", referencedColumnName = "salonId")
+    @JoinColumn(name = "salId", referencedColumnName = "salId")
     private Salon salon;
 
     @JsonIgnore

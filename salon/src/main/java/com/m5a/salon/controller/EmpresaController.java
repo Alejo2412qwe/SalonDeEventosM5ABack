@@ -4,8 +4,8 @@
  */
 package com.m5a.salon.controller;
 
-import com.m5a.salon.model.entity.ProductoServicio;
-import com.m5a.salon.service.productoService;
+import com.m5a.salon.model.entity.Empresa;
+import com.m5a.salon.service.EmpresaService;
 import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,40 +25,37 @@ import org.springframework.web.bind.annotation.RestController;
  * @author LaptopSA
  */
 @RestController
-@RequestMapping("/productoServicio")
-public class productoController {
+@RequestMapping("/empresa")
+public class EmpresaController {
 
     @Autowired
-    productoService service;
+    public EmpresaService empresaService;
 
     @GetMapping("/listar")
-    public ResponseEntity<List<ProductoServicio>> listarProductos() {
-        return new ResponseEntity<>(service.findByAll(), HttpStatus.OK);
+    public ResponseEntity<List<Empresa>> listarEmpresas() {
+        return new ResponseEntity<>(empresaService.findByAll(), HttpStatus.OK);
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<ProductoServicio> crearProductos(@RequestBody ProductoServicio ps) {
+    public ResponseEntity<Empresa> crearEmpresa(@RequestBody Empresa e) {
         Timestamp fecha = new Timestamp(System.currentTimeMillis());
-        ps.setProdFechaRegistro(fecha);
-        return new ResponseEntity<>(service.save(ps), HttpStatus.CREATED);
+        e.setEmpFechaRegistro(fecha);
+        return new ResponseEntity<>(empresaService.save(e), HttpStatus.CREATED);
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<ProductoServicio> actualizarProductos(@PathVariable Integer id, @RequestBody ProductoServicio ps) {
-        ProductoServicio producto = service.findById(id);
-        if (producto != null) {
+    public ResponseEntity<Empresa> actualizarEmpresa(@PathVariable Integer id, @RequestBody Empresa e) {
+        Empresa empresa = empresaService.findById(id);
+        if (empresa != null) {
             try {
 
-                producto.setProdId(ps.getProdId());
-                producto.setProdNombre(ps.getProdNombre());
-                producto.setProdPrecio(ps.getProdPrecio());
-                producto.setProdEstado(ps.getProdEstado());
-                producto.setProdDescripcion(ps.getProdDescripcion());
-                producto.setCategoria(ps.getCategoria());
-                producto.setTipo(ps.getTipo());
+                empresa.setEmpId(e.getEmpId());
+                empresa.setEmpFechaRegistro(e.getEmpFechaRegistro());
+                empresa.setEmpNombre(e.getEmpNombre());
+                empresa.setEmpTelefono(e.getEmpTelefono());
 
-                return new ResponseEntity<>(service.save(producto), HttpStatus.CREATED);
-            } catch (Exception e) {
+                return new ResponseEntity<>(empresaService.save(empresa), HttpStatus.CREATED);
+            } catch (Exception ex) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
@@ -68,8 +65,8 @@ public class productoController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<ProductoServicio> elimiarProductos(@PathVariable Integer id) {
-        service.delete(id);
+    public ResponseEntity<Empresa> elimiarCotizaciones(@PathVariable Integer id) {
+        empresaService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

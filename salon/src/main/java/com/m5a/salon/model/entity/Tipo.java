@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.sql.Timestamp;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,13 +35,18 @@ public class Tipo {
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idTipo")
-    private int idTipo;
+    @Column(name = "tipId")
+    private int tipId;
 
     @Setter
     @Getter
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "tipNombre")
+    private String tipNombre;
+
+    @Setter
+    @Getter
+    @Column(name = "tipoFechaRegistro")
+    private Timestamp tipFechaRegistro;
 
     @JsonIgnore
     @OneToMany(mappedBy = "tipo")

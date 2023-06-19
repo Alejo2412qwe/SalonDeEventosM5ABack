@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -34,11 +35,14 @@ public class Rol {
     @Column(name = "rolId")
     private int rolId;
 
+    @Column(name = "rolNombre")
+    private String rolNombre;
+
+    @Column(name = "rolFechaRegistro")
+    private Timestamp rolFechaRegistro;
+
     @JsonIgnore
     @OneToMany(mappedBy = "rol")
     private List<Usuario> listaUsuarios;
-
-    @Column(name = "rolNombre")
-    private String nombre;
 
 }

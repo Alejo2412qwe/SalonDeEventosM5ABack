@@ -6,6 +6,7 @@ package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Salon;
 import com.m5a.salon.service.SalonService;
+import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,8 @@ public class SalonController {
 
     @PostMapping("/crear")
     public ResponseEntity<Salon> crearSalon(@RequestBody Salon s) {
+        Timestamp fecha = new Timestamp(System.currentTimeMillis());
+        s.setSalFechaRegistro(fecha);
         return new ResponseEntity<>(salonService.save(s), HttpStatus.CREATED);
     }
 
@@ -45,12 +48,13 @@ public class SalonController {
         Salon salon = salonService.findById(id);
         if (salon != null) {
             try {
-                salon.setCapacidad(s.getCapacidad());
-                salon.setCostoHora(s.getCostoHora());
-                salon.setDireccion(s.getDireccion());
-                salon.setEstado(s.isEstado());
+                salon.setSalCapacidad(s.getSalCapacidad());
+                salon.setSalCostoHora(s.getSalCostoHora());
+                salon.setSalDireccion(s.getSalDireccion());
+                salon.setSalEstado(s.isSalEstado());
                 salon.setListaCotizaciones(s.getListaCotizaciones());
-                salon.setNombre(s.getNombre());
+                salon.setSalNombre(s.getSalNombre());
+                salon.setSalFechaRegistro(s.getSalFechaRegistro());
                 return new ResponseEntity<>(salonService.save(salon), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

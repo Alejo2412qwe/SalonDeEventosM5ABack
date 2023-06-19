@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -35,28 +36,33 @@ public class ProductoServicio {
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idProductoServicio")
-    private int idProductoServicio;
+    @Column(name = "prodId")
+    private int prodId;
 
     @Getter
     @Setter
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "prodNombre")
+    private String prodNombre;
 
     @Getter
     @Setter
-    @Column(name = "precio")
-    private double precio;
+    @Column(name = "prodPrecio")
+    private double prodPrecio;
 
     @Getter
     @Setter
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "prodDescripcion")
+    private String prodDescripcion;
 
     @Getter
     @Setter
-    @Column(name = "estado")
-    private int estado;
+    @Column(name = "prodEstado")
+    private int prodEstado;
+
+    @Getter
+    @Setter
+    @Column(name = "prodFechaRegistro")
+    private Timestamp prodFechaRegistro;
 
     @JsonIgnore
     @OneToMany(mappedBy = "productoServicio")
@@ -65,13 +71,13 @@ public class ProductoServicio {
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "idTipo", referencedColumnName = "idTipo")
+    @JoinColumn(name = "tipId", referencedColumnName = "tipId")
     private Tipo tipo;
 
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "cateId", referencedColumnName = "cateId")
+    @JoinColumn(name = "catId", referencedColumnName = "catId")
     private Categoria categoria;
 
 }

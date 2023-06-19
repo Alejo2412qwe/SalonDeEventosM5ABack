@@ -6,6 +6,7 @@ package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Cotizacion;
 import com.m5a.salon.service.CotizacionService;
+import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,8 @@ public class CotizacionController {
 
     @PostMapping("/crear")
     public ResponseEntity<Cotizacion> crearCotizaciones(@RequestBody Cotizacion c) {
+        Timestamp fecha = new Timestamp(System.currentTimeMillis());
+        c.setCotiFechaRegistro(fecha);
         return new ResponseEntity<>(cotizacionService.save(c), HttpStatus.CREATED);
     }
 
@@ -45,15 +48,16 @@ public class CotizacionController {
         Cotizacion cotizacion = cotizacionService.findById(id);
         if (cotizacion != null) {
             try {
-                cotizacion.setDescripcion(c.getDescripcion());
-                cotizacion.setEstado(c.isEstado());
-                cotizacion.setFecha(c.getFecha());
-                cotizacion.setFechaevento(c.getFechaevento());
-                cotizacion.setHorafin(c.getHorafin());
-                cotizacion.setHorainicio(c.getHorainicio());
-                cotizacion.setMonto(c.getMonto());
+                cotizacion.setCotiId(c.getCotiId());
+                cotizacion.setCotiDescripcion(c.getCotiDescripcion());
+                cotizacion.setCotiEstado(c.isCotiEstado());
+                cotizacion.setCotiFechaRegistro(c.getCotiFechaRegistro());
+                cotizacion.setCotiFechaEvento(c.getCotiFechaEvento());
+                cotizacion.setCotiHoraFin(c.getCotiHoraFin());
+                cotizacion.setCotiHoraInicio(c.getCotiHoraInicio());
+                cotizacion.setCotiMonto(c.getCotiMonto());
                 cotizacion.setSalon(c.getSalon());
-                cotizacion.setTipoevento(c.getTipoevento());
+                cotizacion.setCotiTipoEvento(c.getCotiTipoEvento());
                 cotizacion.setUsuario(c.getUsuario());
 
                 return new ResponseEntity<>(cotizacionService.save(cotizacion), HttpStatus.CREATED);

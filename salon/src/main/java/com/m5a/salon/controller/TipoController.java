@@ -6,6 +6,7 @@ package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Tipo;
 import com.m5a.salon.service.TipoService;
+import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,8 @@ public class TipoController {
 
     @PostMapping("/crear")
     public ResponseEntity<Tipo> crearTipos(@RequestBody Tipo t) {
+        Timestamp fecha = new Timestamp(System.currentTimeMillis());
+        t.setTipFechaRegistro(fecha);
         return new ResponseEntity<>(tipoService.save(t), HttpStatus.CREATED);
     }
 
@@ -45,9 +48,10 @@ public class TipoController {
         Tipo tipo = tipoService.findById(id);
         if (tipo != null) {
             try {
-                
-                tipo.setIdTipo(t.getIdTipo());
-                tipo.setNombre(t.getNombre());
+
+                tipo.setTipId(t.getTipId());
+                tipo.setTipNombre(t.getTipNombre());
+                tipo.setTipFechaRegistro(t.getTipFechaRegistro());
 
                 return new ResponseEntity<>(tipoService.save(tipo), HttpStatus.CREATED);
             } catch (Exception e) {

@@ -6,6 +6,7 @@ package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Rol;
 import com.m5a.salon.service.RolService;
+import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,8 @@ public class RolController {
 
     @PostMapping("/crear")
     public ResponseEntity<Rol> crearRol(@RequestBody Rol r) {
+        Timestamp fecha = new Timestamp(System.currentTimeMillis());
+        r.setRolFechaRegistro(fecha);
         return new ResponseEntity<>(rolService.save(r), HttpStatus.CREATED);
     }
 
@@ -45,8 +48,10 @@ public class RolController {
         Rol rol = rolService.findById(id);
         if (rol != null) {
             try {
-                rol.setNombre(r.getNombre());
-               rol.setListaUsuarios(r.getListaUsuarios());
+                rol.setRolId(r.getRolId());
+                rol.setRolNombre(r.getRolNombre());
+                rol.setListaUsuarios(r.getListaUsuarios());
+                rol.setRolFechaRegistro(r.getRolFechaRegistro());
                 return new ResponseEntity<>(rolService.save(rol), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

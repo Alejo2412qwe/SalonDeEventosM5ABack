@@ -10,13 +10,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.sql.Timestamp;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,13 +33,18 @@ public class Categoria {
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cateId")
-    private int cateId;
+    @Column(name = "catId")
+    private int catId;
 
     @Getter
     @Setter
-    @Column(name = "cateNombre")
-    private String nombre;
+    @Column(name = "catNombre")
+    private String catNombre;
+
+    @Getter
+    @Setter
+    @Column(name = "catFechaRegistro")
+    private Timestamp catFechaRegistro;
 
     @JsonIgnore
     @OneToMany(mappedBy = "categoria")

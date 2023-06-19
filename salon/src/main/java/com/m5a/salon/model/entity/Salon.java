@@ -10,8 +10,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.sql.Timestamp;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,26 +33,39 @@ public class Salon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "salonId")
-    private int salonId;
+    @Column(name = "salId")
+    private int salId;
 
-    @Column(name = "salonNombre")
-    private String nombre;
+    @Column(name = "salNombre")
+    private String salNombre;
 
     @Column(name = "salonDireccion")
-    private String direccion;
+    private String salDireccion;
 
-    @Column(name = "salonCapacidad")
-    private int capacidad;
+    @Column(name = "salCapacidad")
+    private int salCapacidad;
 
-    @Column(name = "salonCostoHora")
-    private double costoHora;
+    @Column(name = "salCostoHora")
+    private double salCostoHora;
 
-    @Column(name = "salonEstado")
-    private boolean estado;
+    @Column(name = "salEstado")
+    private boolean salEstado;
+
+    @Column(name = "salLongitud")
+    private float salLongitud;
+
+    @Column(name = "salLatitud")
+    private float salLatitud;
+
+    @Column(name = "salFechaRegistro")
+    private Timestamp salFechaRegistro;
 
     @JsonIgnore
     @OneToMany(mappedBy = "salon")
     private List<Cotizacion> listaCotizaciones;
+
+    @ManyToOne
+    @JoinColumn(name = "empId", referencedColumnName = "empId")
+    private Empresa empresa;
 
 }

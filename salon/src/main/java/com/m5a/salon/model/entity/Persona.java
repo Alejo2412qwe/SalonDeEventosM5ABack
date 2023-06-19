@@ -44,32 +44,32 @@ public class Persona {
     @Getter
     @Setter
     @Column(name = "perNombre")
-    private String PerNombre;
+    private String perNombre;
 
     @Getter
     @Setter
     @Column(name = "perApellido")
-    private String PerApellido;
+    private String perApellido;
 
     @Getter
     @Setter
     @Column(name = "perCorreo")
-    private String PerCorreo;
+    private String perCorreo;
 
     @Getter
     @Setter
     @Column(name = "perDireccion")
-    private String PerDireccion;
+    private String perDireccion;
 
     @Getter
     @Setter
     @Column(name = "perTelefono")
-    private String PerTelefono;
+    private String perTelefono;
 
     @Getter
     @Setter
     @Column(name = "perFechaNacimiento")
-    private Date PerFechaNacimiento;
+    private Date perFechaNacimiento;
 
     @OneToOne(mappedBy = "UsuPerId")
     private Usuario usuario;

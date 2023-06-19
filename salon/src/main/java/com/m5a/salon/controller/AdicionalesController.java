@@ -6,6 +6,7 @@ package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Adicionales;
 import com.m5a.salon.service.AdicionalesService;
+import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,8 @@ public class AdicionalesController {
 
     @PostMapping("/crear")
     public ResponseEntity<Adicionales> crearAdicionales(@RequestBody Adicionales a) {
+        Timestamp fecha = new Timestamp(System.currentTimeMillis());
+        a.setAdiFechaRegistro(fecha);
         return new ResponseEntity<>(adicionalesService.save(a), HttpStatus.CREATED);
     }
 
@@ -45,8 +48,10 @@ public class AdicionalesController {
         Adicionales adicionales = adicionalesService.findById(id);
         if (adicionales != null) {
             try {
+                adicionales.setAdiId(a.getAdiId());
                 adicionales.setProductoServicio(a.getProductoServicio());
                 adicionales.setCotizacion(a.getCotizacion());
+                adicionales.setAdiFechaRegistro(a.getAdiFechaRegistro());
 
                 return new ResponseEntity<>(adicionalesService.save(adicionales), HttpStatus.CREATED);
             } catch (Exception e) {

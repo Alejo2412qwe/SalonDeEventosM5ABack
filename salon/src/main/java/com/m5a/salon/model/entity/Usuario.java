@@ -16,41 +16,53 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author LaptopSA
  */
 @Entity
-@Data
 @AllArgsConstructor
 @Table(name = "Usuario")
 @NoArgsConstructor
 public class Usuario implements Serializable {
 
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuId")
     private int usuId;
 
+    @Getter
+    @Setter
     @Column(name = "usuNombreUsuario")
     private String usuario;
 
+    @Getter
+    @Setter
     @Column(name = "usuContraseña")
     private String contrasena;
 
+    @Getter
+    @Setter
     @Column(name = "usuFechaRegistro")
-    private Date fecharegistro;
+    private Timestamp fecharegistro;
 
+    @Getter
+    @Setter
     @OneToOne
     @JoinColumn(name = "UsuPerId")
     private Persona UsuPerId;
 
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
     private Rol rol;
@@ -58,4 +70,8 @@ public class Usuario implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private List<Cotizacion> listaCotizaciones;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
+    private List<Reserva> listaReservas;
 }

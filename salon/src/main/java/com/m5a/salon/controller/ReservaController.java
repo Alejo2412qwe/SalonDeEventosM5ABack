@@ -6,6 +6,7 @@ package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Reserva;
 import com.m5a.salon.service.ReservaService;
+import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,8 @@ public class ReservaController {
 
     @PostMapping("/crear")
     public ResponseEntity<Reserva> crearReservaciones(@RequestBody Reserva r) {
+        Timestamp fecha = new Timestamp(System.currentTimeMillis());
+        r.setResFechaRegistro(fecha);
         return new ResponseEntity<>(reservaService.save(r), HttpStatus.CREATED);
     }
 
@@ -45,9 +48,12 @@ public class ReservaController {
         Reserva reserva = reservaService.findById(id);
         if (reserva != null) {
             try {
-                reserva.setComprobante(r.getComprobante());
-                reserva.setEstado(r.isEstado());
+                reserva.setResId(r.getResId());
+                reserva.setResComprobante(r.getResComprobante());
+                reserva.setResEstado(r.isResEstado());
                 reserva.setReCotiId(r.getReCotiId());
+                reserva.setUsuario(r.getUsuario());
+                reserva.setResFechaRegistro(r.getResFechaRegistro());
 
                 return new ResponseEntity<>(reservaService.save(reserva), HttpStatus.CREATED);
             } catch (Exception e) {

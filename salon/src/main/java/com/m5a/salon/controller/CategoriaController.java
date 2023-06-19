@@ -6,6 +6,7 @@ package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Categoria;
 import com.m5a.salon.service.CategoriaService;
+import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,8 @@ public class CategoriaController {
 
     @PostMapping("/crear")
     public ResponseEntity<Categoria> crearCategoria(@RequestBody Categoria c) {
+        Timestamp fecha = new Timestamp(System.currentTimeMillis());
+        c.setCatFechaRegistro(fecha);
         return new ResponseEntity<>(categoriaService.save(c), HttpStatus.CREATED);
     }
 
@@ -45,7 +48,9 @@ public class CategoriaController {
         Categoria categoria = categoriaService.findById(id);
         if (categoria != null) {
             try {
-                categoria.setNombre(c.getNombre());
+                categoria.setCatId(c.getCatId());
+                categoria.setCatNombre(c.getCatNombre());
+                categoria.setCatFechaRegistro(c.getCatFechaRegistro());
 
                 return new ResponseEntity<>(categoriaService.save(categoria), HttpStatus.CREATED);
             } catch (Exception e) {
