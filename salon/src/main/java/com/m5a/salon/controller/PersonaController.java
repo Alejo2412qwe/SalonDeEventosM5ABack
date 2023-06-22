@@ -37,7 +37,12 @@ public class PersonaController {
 
     @PostMapping("/crear")
     public ResponseEntity<Persona> crearPersona(@RequestBody Persona p) {
-        return new ResponseEntity<>(personaService.save(p), HttpStatus.CREATED);
+        boolean ban = personaService.siExisteCedula(p.getPerCedula());
+        if (ban) {
+            return new ResponseEntity<>(personaService.save(p), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/actualizar/{id}")

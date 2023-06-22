@@ -6,6 +6,8 @@ package com.m5a.salon.repository;
 
 import com.m5a.salon.model.entity.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -13,4 +15,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PersonaRepository extends JpaRepository<Persona, Integer> {
 
+    @Query(value = "SELECT COUNT(*) FROM persona WHERE per_cedula = :cedulaPersona", nativeQuery = true)
+    int contarCedulas(@Param("cedulaPersona") String cedulaPersona);
 }

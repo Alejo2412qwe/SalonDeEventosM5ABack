@@ -26,4 +26,15 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Integer> impleme
     public CrudRepository<Usuario, Integer> getDao() {
         return usuarioRepository;
     }
+
+    //valida usuario no repetido
+    public boolean siExisteUsuario(String nombreUsuario) {
+        int usuarios = usuarioRepository.contarUsuariosPorNombre(nombreUsuario);
+        if (usuarios > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

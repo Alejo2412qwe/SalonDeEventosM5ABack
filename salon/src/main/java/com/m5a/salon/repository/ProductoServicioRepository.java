@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author LaptopSA
  */
-public interface ProductoServicioRepository extends JpaRepository<ProductoServicio, Integer>{
-    
+public interface ProductoServicioRepository extends JpaRepository<ProductoServicio, Integer> {
+   
 }
