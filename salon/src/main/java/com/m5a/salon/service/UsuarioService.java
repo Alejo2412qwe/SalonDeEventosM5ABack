@@ -26,4 +26,12 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Integer> impleme
     public CrudRepository<Usuario, Integer> getDao() {
         return usuarioRepository;
     }
+
+    public Usuario LogIn(String usuario, String password) {
+        return usuarioRepository.buscarUser(usuario, password);
+    }
+
+    public Usuario Username(String usuario) {
+        return usuarioRepository.buscarNombre(usuario);
+    }
 }
