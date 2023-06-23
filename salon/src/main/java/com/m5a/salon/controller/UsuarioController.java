@@ -55,9 +55,9 @@ public class UsuarioController {
 
     @GetMapping("username/{usuario}")
     public ResponseEntity<Usuario> buscarUsername(@PathVariable String usuario) {
+//        Usuario usuarioEncontrado = usuarioService.Username(usuario);
 
-        Usuario usuarioEncontrado = usuarioService.Username(usuario);
-        return ResponseEntity.ok(usuarioEncontrado);
+        return new ResponseEntity<>(usuarioService.Username(usuario), HttpStatus.OK);
     }
 
     @PostMapping("/crear")
@@ -67,12 +67,12 @@ public class UsuarioController {
         u.setContrasena(PasswordEncoder.encode(u.getContrasena()));
 //        boolean ban = usuarioService.siExisteUsuario(u.getUsuario());
 //        if (ban) {
-        return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
+            return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
 //        } else {
 //            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 //        }
     }
-
+    
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario u) {
         Usuario usuario = usuarioService.findById(id);
