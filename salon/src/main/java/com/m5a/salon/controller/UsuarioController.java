@@ -41,6 +41,25 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.findByAll(), HttpStatus.OK);
     }
 
+    //LOG IN
+    @GetMapping("/login/{usuario}/{password}")
+    public ResponseEntity<Usuario> buscarUsuario(@PathVariable String usuario, @PathVariable String password) {
+        Usuario usuarioEncontrado = usuarioService.LogIn(usuario, password);
+
+        if (usuarioEncontrado != null) {
+            return ResponseEntity.ok(usuarioEncontrado);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("username/{usuario}")
+    public ResponseEntity<Usuario> buscarUsername(@PathVariable String usuario) {
+//        Usuario usuarioEncontrado = usuarioService.Username(usuario);
+
+        return new ResponseEntity<>(usuarioService.Username(usuario), HttpStatus.OK);
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario u) {
         Timestamp fecha = new Timestamp(System.currentTimeMillis());
