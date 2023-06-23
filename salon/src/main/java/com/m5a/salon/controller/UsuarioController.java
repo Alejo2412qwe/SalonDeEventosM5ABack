@@ -55,9 +55,9 @@ public class UsuarioController {
 
     @GetMapping("username/{usuario}")
     public ResponseEntity<Usuario> buscarUsername(@PathVariable String usuario) {
-//        Usuario usuarioEncontrado = usuarioService.Username(usuario);
 
-        return new ResponseEntity<>(usuarioService.Username(usuario), HttpStatus.OK);
+        Usuario usuarioEncontrado = usuarioService.Username(usuario);
+        return ResponseEntity.ok(usuarioEncontrado);
     }
 
     @PostMapping("/crear")
@@ -65,12 +65,12 @@ public class UsuarioController {
         Timestamp fecha = new Timestamp(System.currentTimeMillis());
         u.setFecharegistro(fecha);
         u.setContrasena(PasswordEncoder.encode(u.getContrasena()));
-        boolean ban = usuarioService.siExisteUsuario(u.getUsuario());
-        if (ban) {
-            return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+//        boolean ban = usuarioService.siExisteUsuario(u.getUsuario());
+//        if (ban) {
+        return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
     }
 
     @PutMapping("/actualizar/{id}")
