@@ -34,4 +34,14 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Integer> impleme
     public Usuario Username(String usuario) {
         return usuarioRepository.buscarNombre(usuario);
     }
+
+    public boolean siExisteUsuario(String usuario) {
+
+        int usuarios = usuarioRepository.siExisteUsuario(usuario);
+        if (usuarios > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
