@@ -26,4 +26,14 @@ public class PersonaService extends GenericServiceImpl<Persona, Integer> impleme
     public CrudRepository<Persona, Integer> getDao() {
         return personaRepository;
     }
+
+    //valida cedula no repetida
+    public boolean siExisteCedula(String cedula) {
+        int cedulas = personaRepository.contarCedulas(cedula);
+        if (cedulas > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
