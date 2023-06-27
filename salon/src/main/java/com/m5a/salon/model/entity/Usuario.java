@@ -5,8 +5,10 @@
 package com.m5a.salon.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,27 +35,32 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Usuario implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
     @Getter
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuId")
-    private int usuId;
+    private Long usuId;
 
     @Getter
     @Setter
     @Column(name = "usuNombreUsuario")
-    private String usuario;
+    private String usuNombreUsuario;
 
     @Getter
     @Setter
-    @Column(name = "usuContraseña")
-    private String contrasena;
+    @Column(name = "usuContrasena")
+    private String usuContrasena;
 
     @Getter
     @Setter
     @Column(name = "usuFechaRegistro")
-    private Timestamp fecharegistro;
+    private Timestamp usuFechaRegistro;
 
     @Getter
     @Setter
@@ -68,10 +75,10 @@ public class Usuario implements Serializable {
     private Rol rol;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Cotizacion> listaCotizaciones;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Reserva> listaReservas;
 }

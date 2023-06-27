@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author LaptopSA
  */
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -53,18 +55,18 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("username/{usuario}")
+    @GetMapping("/username/{usuario}")
     public ResponseEntity<Usuario> buscarUsername(@PathVariable String usuario) {
 
         return ResponseEntity.ok(usuarioService.Username(usuario));
     }
-
+    
     @PostMapping("/crear")
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario u) {
         Timestamp fecha = new Timestamp(System.currentTimeMillis());
-        u.setFecharegistro(fecha);
-        u.setContrasena(PasswordEncoder.encode(u.getContrasena()));
-        boolean ban = usuarioService.siExisteUsuario(u.getUsuario());
+        u.setUsuFechaRegistro(fecha);
+        u.setUsuContrasena(PasswordEncoder.encode(u.getUsuContrasena()));
+        boolean ban = usuarioService.siExisteUsuario(u.getUsuNombreUsuario());
         if (ban) {
             return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
         } else {
@@ -75,16 +77,16 @@ public class UsuarioController {
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario u) {
         Usuario usuario = usuarioService.findById(id);
-        String clave = u.getContrasena();
+        String clave = u.getUsuContrasena();
         if (usuario != null) {
             try {
 
-                u.setContrasena(u.getContrasena().equals(clave) ? u.getContrasena() : PasswordEncoder.encode(clave));
-                usuario.setFecharegistro(u.getFecharegistro());
-                usuario.setUsuario(u.getUsuario());
+                usuario.setUsuContrasena(u.getUsuContrasena().equals(clave) ? u.getUsuContrasena() : PasswordEncoder.encode(clave));
+                usuario.setUsuFechaRegistro(u.getUsuFechaRegistro());
+                usuario.setUsuNombreUsuario(u.getUsuNombreUsuario());
                 usuario.setUsuPerId(u.getUsuPerId());
                 usuario.setRol(u.getRol());
-                usuario.setFecharegistro(u.getFecharegistro());
+                usuario.setUsuFechaRegistro(u.getUsuFechaRegistro());
                 return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

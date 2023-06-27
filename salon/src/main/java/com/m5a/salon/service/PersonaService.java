@@ -27,6 +27,10 @@ public class PersonaService extends GenericServiceImpl<Persona, Integer> impleme
         return personaRepository;
     }
 
+    public int ultimoRegistro() {
+        return personaRepository.ultimoRegistro();
+    }
+
     //valida cedula no repetida
     public boolean siExisteCedula(String cedula) {
         int cedulas = personaRepository.contarCedulas(cedula);

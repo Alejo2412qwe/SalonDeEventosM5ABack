@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -27,14 +28,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "Persona")
 @NoArgsConstructor
-public class Persona {
+public class Persona implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     @Getter
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "perId")
-    private int perId;
+    private Long perId;
 
     @Getter
     @Setter

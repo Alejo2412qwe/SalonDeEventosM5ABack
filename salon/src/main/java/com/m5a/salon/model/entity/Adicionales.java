@@ -40,6 +40,11 @@ public class Adicionales {
     @Column(name = "adiFechaRegistro")
     private Timestamp adiFechaRegistro;
 
+    @Setter
+    @Getter
+    @Column(name = "adiCantidad")
+    private int adiCantidad;
+
     @ManyToOne
     @JoinColumn(name = "cotiId", referencedColumnName = "cotiId")
     private Cotizacion cotizacion;
