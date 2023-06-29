@@ -36,6 +36,12 @@ public class RolController {
         return new ResponseEntity<>(rolService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/rolId/{id}")
+    public ResponseEntity<Rol> prueba(@PathVariable int id) {
+        Rol usuarioEncontrado = new Rol();
+        return new ResponseEntity<>(rolService.findById(id), HttpStatus.OK);
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<Rol> crearRol(@RequestBody Rol r) {
         Timestamp fecha = new Timestamp(System.currentTimeMillis());
