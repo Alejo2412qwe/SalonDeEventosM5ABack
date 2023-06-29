@@ -54,7 +54,7 @@ public class UsuarioController {
         if (PasswordEncoder.matches(password, usuarioEncontrado.getUsuContrasena())) {
             return new ResponseEntity<>(usuarioEncontrado, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
     }
     
@@ -68,16 +68,17 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.buscarUsuario(usuario), HttpStatus.OK);
     }
 
-    @GetMapping("/usuarioUnico/{usuario}")
-    public ResponseEntity<Boolean> usuarioUnico(@PathVariable String usuario) {
+    @GetMapping("/usuarioExiste/{usuario}")
+    public ResponseEntity<Boolean> usuarioExiste(@PathVariable String usuario) {
 
-        return ResponseEntity.ok(usuarioService.usuarioUnico(usuario));
+        return ResponseEntity.ok(usuarioService.usuarioExiste(usuario));
     }
 
     @PostMapping("/crear")
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario u) {
         Timestamp fecha = new Timestamp(System.currentTimeMillis());
         u.setUsuFechaRegistro(fecha);
+//        System.out.println("ROL= "+u.getRol().getRolNombre());
         u.setUsuContrasena(PasswordEncoder.encode(u.getUsuContrasena()));
         return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
 

@@ -39,13 +39,13 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Integer> impleme
 //        return usuarioRepository.(usuario);
 //    }
 
-    public boolean usuarioUnico(String usuario) {
+    public boolean usuarioExiste(String usuario) {
 
         int usuarios = usuarioRepository.usuarioUnico(usuario);
         if (usuarios > 0) {
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 }

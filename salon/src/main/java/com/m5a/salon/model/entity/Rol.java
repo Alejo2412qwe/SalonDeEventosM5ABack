@@ -25,9 +25,9 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @Table(name = "Rol")
-@NoArgsConstructor
+//@NoArgsConstructor
 public class Rol {
 
     @Id
@@ -43,6 +43,7 @@ public class Rol {
 
     @JsonIgnore
     @OneToMany(mappedBy = "rol")
-    private List<Usuario> listaUsuarios;
+    private List<Usuario> listUsuarios;
 
 }
+        
