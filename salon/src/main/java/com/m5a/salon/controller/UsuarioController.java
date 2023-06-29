@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author LaptopSA
  */
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -46,32 +46,41 @@ public class UsuarioController {
     //LOG IN
     @GetMapping("/login/{usuario}/{password}")
     public ResponseEntity<Usuario> buscarUsuario(@PathVariable String usuario, @PathVariable String password) {
-        Usuario usuarioEncontrado = usuarioService.LogIn(usuario, password);
 
-        if (usuarioEncontrado != null) {
-            return ResponseEntity.ok(usuarioEncontrado);
+        Usuario usuarioEncontrado = new Usuario();
+        usuarioEncontrado = usuarioService.buscarUsuario(usuario);
+//        System.out.println("pass= "+usuarioEncontrado.getUsuContrasena());
+//        usuarioEncontrado = usuarioService.LogIn(usuario, password);
+        if (PasswordEncoder.matches(password, usuarioEncontrado.getUsuContrasena())) {
+            return new ResponseEntity<>(usuarioEncontrado, HttpStatus.OK);
         } else {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
     }
-
-    @GetMapping("/username/{usuario}")
-    public ResponseEntity<Usuario> buscarUsername(@PathVariable String usuario) {
-
-        return ResponseEntity.ok(usuarioService.Username(usuario));
-    }
     
+    @GetMapping("/prueba/{usuario}")
+    public ResponseEntity<Usuario> prueba(@PathVariable String usuario) {
+
+        Usuario usuarioEncontrado = new Usuario();
+        usuarioEncontrado = usuarioService.buscarUsuario(usuario);
+        System.out.println("pass= " + usuarioEncontrado.getUsuContrasena());
+//        usuarioEncontrado = usuarioService.LogIn(usuario, password);
+        return new ResponseEntity<>(usuarioService.buscarUsuario(usuario), HttpStatus.OK);
+    }
+
+    @GetMapping("/usuarioUnico/{usuario}")
+    public ResponseEntity<Boolean> usuarioUnico(@PathVariable String usuario) {
+
+        return ResponseEntity.ok(usuarioService.usuarioUnico(usuario));
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario u) {
         Timestamp fecha = new Timestamp(System.currentTimeMillis());
         u.setUsuFechaRegistro(fecha);
         u.setUsuContrasena(PasswordEncoder.encode(u.getUsuContrasena()));
-        boolean ban = usuarioService.siExisteUsuario(u.getUsuNombreUsuario());
-        if (ban) {
-            return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
+
     }
 
     @PutMapping("/actualizar/{id}")
