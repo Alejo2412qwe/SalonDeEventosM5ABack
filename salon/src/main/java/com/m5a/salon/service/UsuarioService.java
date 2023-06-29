@@ -28,16 +28,20 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Integer> impleme
     }
 
     public Usuario LogIn(String usuario, String password) {
-        return usuarioRepository.buscarUser(usuario, password);
+        return usuarioRepository.login(usuario, password);
     }
 
-    public Usuario Username(String usuario) {
-        return usuarioRepository.buscarNombre(usuario);
+    public Usuario buscarUsuario(String usuario) {
+        return usuarioRepository.buscarUsuario(usuario);
     }
 
-    public boolean siExisteUsuario(String usuario) {
+//    public int usuarioUnico(String usuario) {
+//        return usuarioRepository.(usuario);
+//    }
 
-        int usuarios = usuarioRepository.siExisteUsuario(usuario);
+    public boolean usuarioUnico(String usuario) {
+
+        int usuarios = usuarioRepository.usuarioUnico(usuario);
         if (usuarios > 0) {
             return false;
         } else {
