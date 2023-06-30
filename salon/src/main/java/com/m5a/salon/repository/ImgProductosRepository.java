@@ -4,13 +4,13 @@
  */
 package com.m5a.salon.repository;
 
-import com.m5a.salon.model.entity.ImagenesProductos;
+import com.m5a.salon.model.entity.ImgProducto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author LaptopSA
  */
-public interface ImgProductosRepository extends JpaRepository<ImagenesProductos, Integer>{
+public interface ImgProductosRepository extends JpaRepository<ImgProducto, Integer>{
     
 }

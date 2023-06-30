@@ -63,29 +63,22 @@ public class FileController {
     @PostMapping("/upload")
     public ResponseEntity<List<FileModel>> uploadFiles(@RequestParam("files") MultipartFile[] files) {
         String message = "";
-//        try {
-            List<String> fileNames = new ArrayList<>();
+        List<String> fileNames = new ArrayList<>();
 
-            List<FileModel> archivos = new ArrayList<>();
+        List<FileModel> archivos = new ArrayList<>();
 
-            Arrays.asList(files).stream().forEach(file -> {
-                fileService.save(file);
-                fileNames.add(file.getOriginalFilename());
-                
-                FileModel fileModel = new FileModel();
-                fileModel.setName(file.getOriginalFilename());
-                archivos.add(fileModel);
-            });
+        Arrays.asList(files).stream().forEach(file -> {
+            fileService.save(file);
+            fileNames.add(file.getOriginalFilename());
 
-            message = "Se subieron los archivos correctamente " + fileNames;
-            
-            return new ResponseEntity<>(archivos, HttpStatus.OK);
-//            return ResponseEntity.status(HttpStatus.OK).body(new FileMessage(message));
+            FileModel fileModel = new FileModel();
+            fileModel.setName(file.getOriginalFilename());
+            archivos.add(fileModel);
+        });
 
-//        } catch (Exception e) {
-//            message = "Fallo al subir los archivos";
-//            return new  ResponseEntity<>(HttpStatus.EXPECTATION_FAILED).body(archivos);
-//        }
+        message = "Se subieron los archivos correctamente " + fileNames;
+
+        return new ResponseEntity<>(archivos, HttpStatus.OK);
     }
 
     @GetMapping("/files")
@@ -101,6 +94,23 @@ public class FileController {
     }
 
     @GetMapping("/files/{filename:.+}")
+    public ResponseEntity<FileModel> getFilesById(@PathVariable String filename) {
+        FileModel fileModel = new FileModel();
+        List<FileModel> fileInfos = fileService.loadAll().map(path -> {
+            String fileName = path.getFileName().toString();
+            String url = MvcUriComponentsBuilder.fromMethodName(FileController.class, "getFile",
+                    path.getFileName().toString()).build().toString();
+            if (fileName.equals(filename)) {
+                fileModel.setName(fileName);
+                fileModel.setUrl(url);
+            }
+            return fileModel;
+        }).collect(Collectors.toList());
+
+        return new ResponseEntity<>(fileModel, HttpStatus.OK);
+    }
+
+    @GetMapping("/filesImg/{filename:.+}")
     public ResponseEntity<Resource> getFile(@PathVariable String filename) {
         Resource file = fileService.load(filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,

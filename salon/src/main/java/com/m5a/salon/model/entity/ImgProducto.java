@@ -23,22 +23,23 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @AllArgsConstructor
-@Table(name = "ImagenesSalones")
+@Table(name = "ImagenesProductos")
 @NoArgsConstructor
-public class ImagenesSalones {
+public class ImgProducto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "imgSalId")
-    private int imgSalId;
+    @Column(name = "imgProdId")
+    private int imgProdId;
 
     @Column(name = "imgProdNombre")
-    private String imgSalNombre;
+    private String imgProdNombre;
 
-    @Column(name = "imgSalUrl")
-    private String imgSalUrl;
+    @Column(name = "imgProdUrl")
+    private String imgProdUrl;
 
     @ManyToOne
-    @JoinColumn(name = "salId", referencedColumnName = "salId")
-    private Salon salon;
+    @JoinColumn(name = "prodId", referencedColumnName = "prodId")
+    private ProductoServicio productoServicio;
+
 }

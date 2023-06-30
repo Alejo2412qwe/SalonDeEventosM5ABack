@@ -4,7 +4,7 @@
  */
 package com.m5a.salon.controller;
 
-import com.m5a.salon.model.entity.ImagenesSalones;
+import com.m5a.salon.model.entity.ImgSalon;
 import com.m5a.salon.service.ImagenesSalonesService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +31,18 @@ public class ImgSalonesController {
     public ImagenesSalonesService imagenesSalonesService;
 
     @GetMapping("/listar")
-    public ResponseEntity<List<ImagenesSalones>> listarImg() {
+    public ResponseEntity<List<ImgSalon>> listarImg() {
         return new ResponseEntity<>(imagenesSalonesService.findByAll(), HttpStatus.OK);
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<ImagenesSalones> crearImg(@RequestBody ImagenesSalones img) {
+    public ResponseEntity<ImgSalon> crearImg(@RequestBody ImgSalon img) {
         return new ResponseEntity<>(imagenesSalonesService.save(img), HttpStatus.CREATED);
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<ImagenesSalones> actualizarImg(@PathVariable Integer id, @RequestBody ImagenesSalones img) {
-        ImagenesSalones imagen = imagenesSalonesService.findById(id);
+    public ResponseEntity<ImgSalon> actualizarImg(@PathVariable Integer id, @RequestBody ImgSalon img) {
+        ImgSalon imagen = imagenesSalonesService.findById(id);
         if (imagen != null) {
             try {
 
@@ -61,7 +61,7 @@ public class ImgSalonesController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<ImagenesSalones> elimiarPersona(@PathVariable Integer id) {
+    public ResponseEntity<ImgSalon> elimiarPersona(@PathVariable Integer id) {
         imagenesSalonesService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

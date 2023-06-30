@@ -73,10 +73,6 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public Stream<Path> loadAll() {
-        //Files.walk recorre nuestras carpetas (uploads) buscando los archivos
-        // el 1 es la profundidad o nivel que queremos recorrer
-        // :: Referencias a metodos
-        // Relativize sirve para crear una ruta relativa entre la ruta dada y esta ruta
         try {
             return Files.walk(this.root, 1).filter(path -> !path.equals(this.root))
                     .map(this.root::relativize);

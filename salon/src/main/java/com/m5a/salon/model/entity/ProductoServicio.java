@@ -70,7 +70,7 @@ public class ProductoServicio {
 
     @JsonIgnore
     @OneToMany(mappedBy = "productoServicio")
-    private List<ImagenesProductos> listaImagenesProductos;
+    private List<ImgProducto> listaImagenesProductos;
 
     @Getter
     @Setter

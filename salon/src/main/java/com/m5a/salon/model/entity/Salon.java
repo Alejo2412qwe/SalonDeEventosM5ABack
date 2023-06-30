@@ -66,7 +66,7 @@ public class Salon {
 
     @JsonIgnore
     @OneToMany(mappedBy = "salon")
-    private List<ImagenesSalones> listaImagenesSalones;
+    private List<ImgSalon> listaImagenesSalones;
 
     @ManyToOne
     @JoinColumn(name = "empId", referencedColumnName = "empId")
