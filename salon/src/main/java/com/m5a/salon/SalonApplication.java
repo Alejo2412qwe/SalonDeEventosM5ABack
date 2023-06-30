@@ -1,8 +1,11 @@
 package com.m5a.salon;
 
+import com.m5a.salon.genericService.FileService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
+import jakarta.annotation.Resource;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +26,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
                 )
         )
 )
-public class SalonApplication {
+public class SalonApplication implements CommandLineRunner {
+
+    @Resource
+    FileService fileService;
 
     public static void main(String[] args) {
         SpringApplication.run(SalonApplication.class, args);
@@ -43,4 +49,11 @@ public class SalonApplication {
     public BCryptPasswordEncoder bcryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Override
+    public void run(String... args) throws Exception {
+        fileService.deleteAll();
+        fileService.init();
+    }
+
 }

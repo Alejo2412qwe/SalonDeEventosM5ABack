@@ -6,8 +6,8 @@ package com.m5a.salon.service;
 
 import com.m5a.salon.genericService.GenericService;
 import com.m5a.salon.genericService.GenericServiceImpl;
-import com.m5a.salon.model.entity.Cotizacion;
-import com.m5a.salon.repository.CotizacionRepository;
+import com.m5a.salon.model.entity.Adicionales;
+import com.m5a.salon.repository.AdicionalesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,13 @@ import org.springframework.stereotype.Service;
  * @author LaptopSA
  */
 @Service
-public class CotizacionService extends GenericServiceImpl<Cotizacion, Integer> implements GenericService<Cotizacion, Integer> {
+public class AdicionalesServiceImpl extends GenericServiceImpl<Adicionales, Integer> implements GenericService<Adicionales, Integer> {
 
     @Autowired
-    public CotizacionRepository cotizacionRepository;
+    public AdicionalesRepository adicionalesRepository;
 
     @Override
-    public CrudRepository<Cotizacion, Integer> getDao() {
-        return cotizacionRepository;
+    public CrudRepository<Adicionales, Integer> getDao() {
+        return adicionalesRepository;
     }
 }

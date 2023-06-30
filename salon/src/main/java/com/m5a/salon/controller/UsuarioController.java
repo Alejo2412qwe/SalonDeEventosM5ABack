@@ -6,7 +6,7 @@ package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Rol;
 import com.m5a.salon.model.entity.Usuario;
-import com.m5a.salon.service.UsuarioService;
+import com.m5a.salon.service.UsuarioServiceImpl;
 import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 
     @Autowired
-    public UsuarioService usuarioService;
+    public UsuarioServiceImpl usuarioService;
 
     @Autowired
     PasswordEncoder PasswordEncoder;

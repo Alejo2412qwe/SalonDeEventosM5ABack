@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @author LaptopSA
  */
 @Service
-public class UsuarioService extends GenericServiceImpl<Usuario, Integer> implements GenericService<Usuario, Integer> {
+public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> implements GenericService<Usuario, Integer> {
 
     @Autowired
     public UsuarioRepository usuarioRepository;

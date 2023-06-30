@@ -5,7 +5,7 @@
 package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Tipo;
-import com.m5a.salon.service.TipoService;
+import com.m5a.salon.service.TipoServiceImpl;
 import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TipoController {
 
     @Autowired
-    public TipoService tipoService;
+    public TipoServiceImpl tipoService;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Tipo>> listarTipos() {
