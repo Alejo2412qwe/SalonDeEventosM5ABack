@@ -5,7 +5,7 @@
 package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Rol;
-import com.m5a.salon.service.RolService;
+import com.m5a.salon.service.RolServiceImpl;
 import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RolController {
 
     @Autowired
-    public RolService rolService;
+    public RolServiceImpl rolService;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Rol>> listarRoles() {

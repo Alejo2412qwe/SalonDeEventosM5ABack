@@ -5,7 +5,7 @@
 package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Empresa;
-import com.m5a.salon.service.EmpresaService;
+import com.m5a.salon.service.EmpresaServiceImpl;
 import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmpresaController {
 
     @Autowired
-    public EmpresaService empresaService;
+    public EmpresaServiceImpl empresaService;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Empresa>> listarEmpresas() {

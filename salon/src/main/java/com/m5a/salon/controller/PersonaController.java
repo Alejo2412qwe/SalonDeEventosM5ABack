@@ -6,7 +6,7 @@ package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Persona;
 import com.m5a.salon.model.entity.Usuario;
-import com.m5a.salon.service.PersonaService;
+import com.m5a.salon.service.PersonaServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonaController {
 
     @Autowired
-    public PersonaService personaService;
+    public PersonaServiceImpl personaService;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Persona>> listaUsuarios() {

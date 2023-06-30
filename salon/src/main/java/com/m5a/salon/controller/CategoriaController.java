@@ -5,7 +5,7 @@
 package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Categoria;
-import com.m5a.salon.service.CategoriaService;
+import com.m5a.salon.service.CategoriaServiceImpl;
 import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoriaController {
 
     @Autowired
-    public CategoriaService categoriaService;
+    public CategoriaServiceImpl categoriaService;
 
     @GetMapping("/listar")
     public ResponseEntity<List<Categoria>> listarCategoria() {
