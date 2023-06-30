@@ -64,6 +64,10 @@ public class Salon {
     @OneToMany(mappedBy = "salon")
     private List<Cotizacion> listaCotizaciones;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "salon")
+    private List<ImagenesSalones> listaImagenesSalones;
+
     @ManyToOne
     @JoinColumn(name = "empId", referencedColumnName = "empId")
     private Empresa empresa;

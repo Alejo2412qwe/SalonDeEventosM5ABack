@@ -11,11 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import java.sql.Timestamp;
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,33 +23,23 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @AllArgsConstructor
-@Table(name = "Reserva")
+@Table(name = "ImagenesProductos")
 @NoArgsConstructor
-public class Reserva {
+public class ImagenesProductos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reservaId")
-    private int resId;
+    @Column(name = "imgProdId")
+    private int imgProdId;
 
-    @Column(name = "resEstado")
-    private boolean resEstado;
+    @Column(name = "imgProdNombre")
+    private String imgProdNombre;
 
-    @Column(name = "resComprobante")
-    private String resComprobante;
-
-    @Column(name = "resFechaRegistro")
-    private Timestamp resFechaRegistro;
-
-    @OneToOne
-    @JoinColumn(name = "reCotiId")
-    private Cotizacion reCotiId;
-
-    @Column(name = "resFechaEvento")
-    private Date resFechaEvento;
+    @Column(name = "imgProdUrl")
+    private String imgProdUrl;
 
     @ManyToOne
-    @JoinColumn(name = "rolId", referencedColumnName = "rolId")
-    private Usuario usuario;
+    @JoinColumn(name = "prodId", referencedColumnName = "prodId")
+    private ProductoServicio productoServicio;
 
 }

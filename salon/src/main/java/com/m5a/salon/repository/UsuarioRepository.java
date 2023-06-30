@@ -15,9 +15,6 @@ import org.springframework.data.repository.query.Param;
  */
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-    @Query(value = "SELECT COUNT(*) FROM usuario WHERE usu_nombre_usuario = :nombreUsuario", nativeQuery = true)
-    int siExisteUsuario(@Param("nombreUsuario") String nombreUsuario);
-
     @Query(value = "SELECT COUNT(*) FROM usuario WHERE usu_nombre_usuario = :usuario", nativeQuery = true)
     int usuarioUnico(@Param("usuario") String usuario);
 

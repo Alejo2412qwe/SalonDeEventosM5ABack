@@ -68,6 +68,10 @@ public class ProductoServicio {
     @OneToMany(mappedBy = "productoServicio")
     private List<Adicionales> listaAdicionales;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "productoServicio")
+    private List<ImagenesProductos> listaImagenesProductos;
+
     @Getter
     @Setter
     @ManyToOne
