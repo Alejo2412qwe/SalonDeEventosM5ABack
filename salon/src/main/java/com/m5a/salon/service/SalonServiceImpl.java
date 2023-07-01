@@ -26,4 +26,8 @@ public class SalonServiceImpl extends GenericServiceImpl<Salon, Integer> impleme
     public CrudRepository<Salon, Integer> getDao() {
         return salonRepository;
     }
+
+    public Salon buscarPorId(int id) {
+        return salonRepository.buscarSalonPorID(id);
+    }
 }

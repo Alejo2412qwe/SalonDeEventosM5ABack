@@ -6,6 +6,8 @@ package com.m5a.salon.repository;
 
 import com.m5a.salon.model.entity.Salon;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -13,4 +15,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface SalonRepository extends JpaRepository<Salon, Integer> {
 
+    @Query(value = "SELECT * FROM salon WHERE sal_id = :id", nativeQuery = true)
+    Salon buscarSalonPorID(@Param("id") Integer id);
 }
