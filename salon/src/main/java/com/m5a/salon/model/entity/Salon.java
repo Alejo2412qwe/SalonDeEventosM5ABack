@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -29,12 +30,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "Salon")
 @NoArgsConstructor
-public class Salon {
+public class Salon implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "salId")
-    private int salId;
+    private Long salId;
 
     @Column(name = "salNombre")
     private String salNombre;

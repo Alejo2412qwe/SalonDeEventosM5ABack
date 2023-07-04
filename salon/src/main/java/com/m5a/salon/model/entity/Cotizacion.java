@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -31,14 +32,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "Cotizacion")
 @NoArgsConstructor
-public class Cotizacion {
+public class Cotizacion implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
     @Getter
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cotiId")
-    private int cotiId;
+    private Long cotiId;
 
     @Getter
     @Setter

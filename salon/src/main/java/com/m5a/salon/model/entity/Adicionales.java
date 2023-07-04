@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,12 +29,19 @@ import lombok.Setter;
 @Table(name = "Adicionales")
 @NoArgsConstructor
 @Data
-public class Adicionales {
+public class Adicionales implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "adiId")
-    private int adiId;
+    private Long adiId;
 
     @Setter
     @Getter
