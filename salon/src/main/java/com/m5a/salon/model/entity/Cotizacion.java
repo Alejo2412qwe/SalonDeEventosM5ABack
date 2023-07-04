@@ -92,19 +92,20 @@ public class Cotizacion implements Serializable {
     @Setter
     @ManyToOne
     @JoinColumn(name = "salId", referencedColumnName = "salId")
-    private Salon salon;
+    private Salon salId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "cotizacion")
+    @OneToMany(mappedBy = "cotiId")
     private List<Adicionales> listaAdicionales;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "reCotiId")
-    private Reserva reserva;
+    private Reserva reCotiId;
 
     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")
-    private Usuario usuario;
+    private Usuario usuId;
 
 }

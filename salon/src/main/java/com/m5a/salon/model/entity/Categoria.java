@@ -55,6 +55,6 @@ public class Categoria implements Serializable {
     private Timestamp catFechaRegistro;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "catId")
     private List<ProductoServicio> listaProductos;
 }

@@ -52,7 +52,7 @@ public class ReservaController {
                 reserva.setResComprobante(r.getResComprobante());
                 reserva.setResEstado(r.isResEstado());
                 reserva.setReCotiId(r.getReCotiId());
-                reserva.setUsuario(r.getUsuario());
+                reserva.setUsuId(r.getUsuId());
                 reserva.setResFechaRegistro(r.getResFechaRegistro());
 
                 return new ResponseEntity<>(reservaService.save(reserva), HttpStatus.CREATED);

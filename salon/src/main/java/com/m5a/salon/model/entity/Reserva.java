@@ -4,6 +4,7 @@
  */
 package com.m5a.salon.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -57,11 +58,12 @@ public class Reserva implements Serializable {
     @JoinColumn(name = "reCotiId")
     private Cotizacion reCotiId;
 
+    @JsonIgnore
     @Column(name = "resFechaEvento")
     private Date resFechaEvento;
 
     @ManyToOne
-    @JoinColumn(name = "rolId", referencedColumnName = "rolId")
-    private Usuario usuario;
+    @JoinColumn(name = "usuId", referencedColumnName = "usuId")
+    private Usuario usuId;
 
 }

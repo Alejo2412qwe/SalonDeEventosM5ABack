@@ -49,8 +49,8 @@ public class AdicionalesController {
         if (adicionales != null) {
             try {
                 adicionales.setAdiId(a.getAdiId());
-                adicionales.setProductoServicio(a.getProductoServicio());
-                adicionales.setCotizacion(a.getCotizacion());
+                adicionales.setProdId(a.getProdId());
+                adicionales.setCotiId(a.getCotiId());
                 adicionales.setAdiFechaRegistro(a.getAdiFechaRegistro());
 
                 return new ResponseEntity<>(adicionalesService.save(adicionales), HttpStatus.CREATED);

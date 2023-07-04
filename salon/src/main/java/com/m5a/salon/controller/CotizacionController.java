@@ -56,9 +56,9 @@ public class CotizacionController {
                 cotizacion.setCotiHoraFin(c.getCotiHoraFin());
                 cotizacion.setCotiHoraInicio(c.getCotiHoraInicio());
                 cotizacion.setCotiMonto(c.getCotiMonto());
-                cotizacion.setSalon(c.getSalon());
+                cotizacion.setSalId(c.getSalId());
                 cotizacion.setCotiTipoEvento(c.getCotiTipoEvento());
-                cotizacion.setUsuario(c.getUsuario());
+                cotizacion.setUsuId(c.getUsuId());
 
                 return new ResponseEntity<>(cotizacionService.save(cotizacion), HttpStatus.CREATED);
             } catch (Exception e) {

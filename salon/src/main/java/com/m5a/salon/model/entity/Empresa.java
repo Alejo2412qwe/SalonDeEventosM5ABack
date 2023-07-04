@@ -66,7 +66,7 @@ public class Empresa implements Serializable {
     private Timestamp empFechaRegistro;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "empresa")
+    @OneToMany(mappedBy = "empId")
     private List<Salon> listaSalones;
 
 }

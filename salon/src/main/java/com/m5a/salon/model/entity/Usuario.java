@@ -22,7 +22,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -30,9 +29,7 @@ import lombok.Setter;
  * @author LaptopSA
  */
 @Entity
-@AllArgsConstructor
 @Table(name = "Usuario")
-@NoArgsConstructor
 public class Usuario implements Serializable {
 
     /**
@@ -68,20 +65,20 @@ public class Usuario implements Serializable {
     @Getter
     @Setter
     @OneToOne
-    @JoinColumn(name = "UsuPerId")
-    private Persona UsuPerId;
+    @JoinColumn(name = "usuPerId")
+    private Persona usuPerId;
 
     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "rolId", referencedColumnName = "rolId")
-    private Rol rol;
+    private Rol rolId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Cotizacion> listaCotizaciones;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Reserva> listaReservas;
 }

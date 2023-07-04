@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
@@ -25,9 +27,7 @@ import lombok.Setter;
  * @author LaptopSA
  */
 @Entity
-@AllArgsConstructor
 @Table(name = "Persona")
-@NoArgsConstructor
 public class Persona implements Serializable {
 
     /**
@@ -80,6 +80,6 @@ public class Persona implements Serializable {
     @Column(name = "perFechaNacimiento")
     private Date perFechaNacimiento;
 
-    @OneToOne(mappedBy = "UsuPerId")
+    @OneToOne(mappedBy = "usuPerId")
     private Usuario usuario;
 }

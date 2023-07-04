@@ -49,7 +49,7 @@ public class ImgProductosController {
                 imagen.setImgProdId(img.getImgProdId());
                 imagen.setImgProdNombre(img.getImgProdNombre());
                 imagen.setImgProdUrl(img.getImgProdUrl());
-                imagen.setProductoServicio(img.getProductoServicio());
+                imagen.setProdId(img.getProdId());
 
                 return new ResponseEntity<>(imagenesProductosService.save(imagen), HttpStatus.CREATED);
             } catch (Exception e) {

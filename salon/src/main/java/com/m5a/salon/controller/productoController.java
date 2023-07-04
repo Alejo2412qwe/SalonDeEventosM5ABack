@@ -54,8 +54,8 @@ public class productoController {
                 producto.setProdPrecio(ps.getProdPrecio());
                 producto.setProdEstado(ps.getProdEstado());
                 producto.setProdDescripcion(ps.getProdDescripcion());
-                producto.setCategoria(ps.getCategoria());
-                producto.setTipo(ps.getTipo());
+                producto.setCatId(ps.getCatId());
+                producto.setTipId(ps.getTipId());
 
                 return new ResponseEntity<>(service.save(producto), HttpStatus.CREATED);
             } catch (Exception e) {

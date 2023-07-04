@@ -55,7 +55,7 @@ public class Tipo implements Serializable {
     private Timestamp tipFechaRegistro;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tipo")
+    @OneToMany(mappedBy = "tipId")
     private List<ProductoServicio> listaProductos;
 
 }

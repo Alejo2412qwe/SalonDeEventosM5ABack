@@ -49,7 +49,7 @@ public class ImgSalonesController {
                 imagen.setImgSalId(img.getImgSalId());
                 imagen.setImgSalNombre(img.getImgSalNombre());
                 imagen.setImgSalUrl(img.getImgSalUrl());
-                imagen.setSalon(img.getSalon());
+                imagen.setSalId(img.getSalId());
 
                 return new ResponseEntity<>(imagenesSalonesService.save(imagen), HttpStatus.CREATED);
             } catch (Exception e) {

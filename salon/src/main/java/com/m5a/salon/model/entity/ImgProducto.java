@@ -48,6 +48,6 @@ public class ImgProducto implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "prodId", referencedColumnName = "prodId")
-    private ProductoServicio productoServicio;
+    private ProductoServicio prodId;
 
 }

@@ -48,5 +48,5 @@ public class ImgSalon implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "salId", referencedColumnName = "salId")
-    private Salon salon;
+    private Salon salId;
 }

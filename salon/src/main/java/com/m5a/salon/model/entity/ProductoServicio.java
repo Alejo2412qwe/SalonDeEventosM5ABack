@@ -73,23 +73,23 @@ public class ProductoServicio implements Serializable{
     private Timestamp prodFechaRegistro;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "productoServicio")
+    @OneToMany(mappedBy = "prodId")
     private List<Adicionales> listaAdicionales;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "productoServicio")
+    @OneToMany(mappedBy = "prodId")
     private List<ImgProducto> listaImagenesProductos;
 
     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "tipId", referencedColumnName = "tipId")
-    private Tipo tipo;
+    private Tipo tipId;
 
     @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "catId", referencedColumnName = "catId")
-    private Categoria categoria;
+    private Categoria catId;
 
 }

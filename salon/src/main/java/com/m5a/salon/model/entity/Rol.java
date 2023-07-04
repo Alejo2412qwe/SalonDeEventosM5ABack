@@ -50,7 +50,7 @@ public class Rol implements Serializable {
     private Timestamp rolFechaRegistro;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "rol")
-    private List<Usuario> listUsuarios;
+    @OneToMany(mappedBy = "rolId")
+    private List<Usuario> listaUsuarios;
 
 }

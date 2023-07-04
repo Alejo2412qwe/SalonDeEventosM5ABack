@@ -69,15 +69,15 @@ public class Salon implements Serializable {
     private Timestamp salFechaRegistro;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "salon")
+    @OneToMany(mappedBy = "salId")
     private List<Cotizacion> listaCotizaciones;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "salon")
+    @OneToMany(mappedBy = "salId")
     private List<ImgSalon> listaImagenesSalones;
 
     @ManyToOne
     @JoinColumn(name = "empId", referencedColumnName = "empId")
-    private Empresa empresa;
+    private Empresa empId;
 
 }

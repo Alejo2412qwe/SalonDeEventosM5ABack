@@ -26,7 +26,7 @@ import lombok.Setter;
  */
 @Entity
 @AllArgsConstructor
-@Table(name = "Adicionales")
+@Table(name = "adicionales")
 @NoArgsConstructor
 @Data
 public class Adicionales implements Serializable {
@@ -55,9 +55,9 @@ public class Adicionales implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "cotiId", referencedColumnName = "cotiId")
-    private Cotizacion cotizacion;
+    private Cotizacion cotiId;
 
     @ManyToOne
     @JoinColumn(name = "prodId", referencedColumnName = "prodId")
-    private ProductoServicio productoServicio;
+    private ProductoServicio prodId;
 }

@@ -57,16 +57,6 @@ public class UsuarioController {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
     }
-    
-    @GetMapping("/prueba/{usuario}")
-    public ResponseEntity<Usuario> prueba(@PathVariable String usuario) {
-
-        Usuario usuarioEncontrado = new Usuario();
-        usuarioEncontrado = usuarioService.buscarUsuario(usuario);
-        System.out.println("pass= " + usuarioEncontrado.getUsuContrasena());
-//        usuarioEncontrado = usuarioService.LogIn(usuario, password);
-        return new ResponseEntity<>(usuarioService.buscarUsuario(usuario), HttpStatus.OK);
-    }
 
     @GetMapping("/usuarioExiste/{usuario}")
     public ResponseEntity<Boolean> usuarioExiste(@PathVariable String usuario) {
@@ -78,7 +68,7 @@ public class UsuarioController {
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario u) {
         Timestamp fecha = new Timestamp(System.currentTimeMillis());
         u.setUsuFechaRegistro(fecha);
-//        System.out.println("ROL= "+u.getRol().getRolNombre());
+
         u.setUsuContrasena(PasswordEncoder.encode(u.getUsuContrasena()));
         return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
 
@@ -95,7 +85,6 @@ public class UsuarioController {
                 usuario.setUsuFechaRegistro(u.getUsuFechaRegistro());
                 usuario.setUsuNombreUsuario(u.getUsuNombreUsuario());
                 usuario.setUsuPerId(u.getUsuPerId());
-                usuario.setRol(u.getRol());
                 usuario.setUsuFechaRegistro(u.getUsuFechaRegistro());
                 return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
             } catch (Exception e) {
