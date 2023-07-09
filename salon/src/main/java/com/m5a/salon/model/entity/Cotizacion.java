@@ -66,7 +66,7 @@ public class Cotizacion implements Serializable {
     @Getter
     @Setter
     @Column(name = "cotiEstado")
-    private boolean cotiEstado;
+    private int cotiEstado;
 
     @Getter
     @Setter

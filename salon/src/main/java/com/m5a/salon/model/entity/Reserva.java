@@ -46,7 +46,7 @@ public class Reserva implements Serializable {
     private Long resId;
 
     @Column(name = "resEstado")
-    private boolean resEstado;
+    private int resEstado;
 
     @Column(name = "resComprobante")
     private String resComprobante;

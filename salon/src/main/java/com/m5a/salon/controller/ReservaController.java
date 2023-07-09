@@ -50,7 +50,7 @@ public class ReservaController {
             try {
                 reserva.setResId(r.getResId());
                 reserva.setResComprobante(r.getResComprobante());
-                reserva.setResEstado(r.isResEstado());
+                reserva.setResEstado(r.getResEstado());
                 reserva.setReCotiId(r.getReCotiId());
                 reserva.setUsuId(r.getUsuId());
                 reserva.setResFechaRegistro(r.getResFechaRegistro());

@@ -56,7 +56,7 @@ public class SalonController {
                 salon.setSalCapacidad(s.getSalCapacidad());
                 salon.setSalCostoHora(s.getSalCostoHora());
                 salon.setSalDireccion(s.getSalDireccion());
-                salon.setSalEstado(s.isSalEstado());
+                salon.setSalEstado(s.getSalEstado());
                 salon.setListaCotizaciones(s.getListaCotizaciones());
                 salon.setSalNombre(s.getSalNombre());
                 salon.setSalFechaRegistro(s.getSalFechaRegistro());

@@ -57,7 +57,7 @@ public class Salon implements Serializable {
     private double salCostoHora;
 
     @Column(name = "salEstado")
-    private boolean salEstado;
+    private int salEstado;
 
     @Column(name = "salLongitud")
     private float salLongitud;

@@ -1,4 +1,4 @@
-/*
+        /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -50,7 +50,7 @@ public class CotizacionController {
             try {
                 cotizacion.setCotiId(c.getCotiId());
                 cotizacion.setCotiDescripcion(c.getCotiDescripcion());
-                cotizacion.setCotiEstado(c.isCotiEstado());
+                cotizacion.setCotiEstado(c.getCotiEstado());
                 cotizacion.setCotiFechaRegistro(c.getCotiFechaRegistro());
                 cotizacion.setCotiFechaEvento(c.getCotiFechaEvento());
                 cotizacion.setCotiHoraFin(c.getCotiHoraFin());

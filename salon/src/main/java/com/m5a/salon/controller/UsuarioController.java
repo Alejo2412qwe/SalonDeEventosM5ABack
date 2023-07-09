@@ -51,6 +51,8 @@ public class UsuarioController {
         usuarioEncontrado = usuarioService.buscarUsuario(usuario);
 //        System.out.println("pass= "+usuarioEncontrado.getUsuContrasena());
 //        usuarioEncontrado = usuarioService.LogIn(usuario, password);
+
+        System.out.println(usuarioEncontrado.getUsuContrasena() + "==" + password);
         if (PasswordEncoder.matches(password, usuarioEncontrado.getUsuContrasena())) {
             return new ResponseEntity<>(usuarioEncontrado, HttpStatus.OK);
         } else {
@@ -71,22 +73,52 @@ public class UsuarioController {
 
         u.setUsuContrasena(PasswordEncoder.encode(u.getUsuContrasena()));
         return new ResponseEntity<>(usuarioService.save(u), HttpStatus.CREATED);
+    }
 
+    @GetMapping("/buscar/{id}")
+    public Usuario buscarUsuId(@PathVariable Integer id) {
+        return usuarioService.findById(id);
     }
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario u) {
-        Usuario usuario = usuarioService.findById(id);
-        String clave = u.getUsuContrasena();
-        if (usuario != null) {
-            try {
+        Usuario encontrado = usuarioService.findById(id);
 
-                usuario.setUsuContrasena(u.getUsuContrasena().equals(clave) ? u.getUsuContrasena() : PasswordEncoder.encode(clave));
-                usuario.setUsuFechaRegistro(u.getUsuFechaRegistro());
-                usuario.setUsuNombreUsuario(u.getUsuNombreUsuario());
-                usuario.setUsuPerId(u.getUsuPerId());
-                usuario.setUsuFechaRegistro(u.getUsuFechaRegistro());
-                return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
+        if (encontrado != null) {
+
+            try {
+                System.out.println(u.getUsuContrasena() + "==" + encontrado.getUsuContrasena());
+                if (PasswordEncoder.matches(u.getUsuContrasena(), encontrado.getUsuContrasena()) || u.getUsuContrasena().equalsIgnoreCase(encontrado.getUsuContrasena())) {
+//                    encontrado.setUsuContrasena(u.getUsuContrasena());
+                    System.out.println("IGUAL");
+                } else {
+                    encontrado.setUsuContrasena(PasswordEncoder.encode(u.getUsuContrasena()));
+                    System.out.println("CODIFICADO");
+                }
+                encontrado.setUsuFechaRegistro(u.getUsuFechaRegistro());
+                encontrado.setUsuNombreUsuario(u.getUsuNombreUsuario());
+                encontrado.setUsuPerId(u.getUsuPerId());
+                encontrado.setUsuFechaRegistro(u.getUsuFechaRegistro());
+                encontrado.setRolId(u.getRolId());
+                return new ResponseEntity<>(usuarioService.save(encontrado), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/eliminarE/{id}")
+    public ResponseEntity<Usuario> actualizarEstado(@PathVariable Integer id) {
+        Usuario encontrado = usuarioService.findById(id);
+
+        if (encontrado != null) {
+
+            try {
+                encontrado.setUsuEstado(0);
+                return new ResponseEntity<>(usuarioService.save(encontrado), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
