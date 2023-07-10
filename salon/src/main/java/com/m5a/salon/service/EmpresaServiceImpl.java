@@ -26,4 +26,8 @@ public class EmpresaServiceImpl extends GenericServiceImpl<Empresa, Integer> imp
     public CrudRepository<Empresa, Integer> getDao() {
         return empresaRepository;
     }
+
+    public Empresa buscarEmpresaPorId(int empId) {
+        return empresaRepository.buscarEmpresaPorId(empId);
+    }
 }

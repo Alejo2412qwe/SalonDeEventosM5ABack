@@ -67,6 +67,24 @@ public class productoController {
         }
     }
 
+    @PutMapping("/eliminarE/{id}")
+    public ResponseEntity<ProductoServicio> actualizarEstado(@PathVariable Integer id, @RequestBody ProductoServicio ps) {
+        ProductoServicio producto = service.findById(id);
+        if (producto != null) {
+            try {
+
+                producto.setProdEstado(0);
+
+                return new ResponseEntity<>(service.save(producto), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<ProductoServicio> elimiarProductos(@PathVariable Integer id) {
         service.delete(id);

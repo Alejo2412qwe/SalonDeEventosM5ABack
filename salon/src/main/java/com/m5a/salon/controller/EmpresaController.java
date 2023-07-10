@@ -36,6 +36,11 @@ public class EmpresaController {
         return new ResponseEntity<>(empresaService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<Empresa> getEmpresaPorId(@PathVariable Integer id) {
+        return new ResponseEntity<>(empresaService.buscarEmpresaPorId(id), HttpStatus.OK);
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<Empresa> crearEmpresa(@RequestBody Empresa e) {
         Timestamp fecha = new Timestamp(System.currentTimeMillis());

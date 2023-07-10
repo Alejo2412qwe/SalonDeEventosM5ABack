@@ -49,8 +49,6 @@ public class UsuarioController {
 
         Usuario usuarioEncontrado = new Usuario();
         usuarioEncontrado = usuarioService.buscarUsuario(usuario);
-//        System.out.println("pass= "+usuarioEncontrado.getUsuContrasena());
-//        usuarioEncontrado = usuarioService.LogIn(usuario, password);
 
         System.out.println(usuarioEncontrado.getUsuContrasena() + "==" + password);
         if (PasswordEncoder.matches(password, usuarioEncontrado.getUsuContrasena())) {
