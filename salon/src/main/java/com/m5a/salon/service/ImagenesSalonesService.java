@@ -8,6 +8,7 @@ import com.m5a.salon.genericService.GenericService;
 import com.m5a.salon.genericService.GenericServiceImpl;
 import com.m5a.salon.model.entity.ImgSalon;
 import com.m5a.salon.repository.ImgSalonRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,9 @@ public class ImagenesSalonesService extends GenericServiceImpl<ImgSalon, Integer
     @Override
     public CrudRepository<ImgSalon, Integer> getDao() {
         return imgSalonRepository;
+    }
+
+    public List<String> findUrlsBySalonId(int salonId) {
+        return imgSalonRepository.findUrlsBySalonId(salonId);
     }
 }

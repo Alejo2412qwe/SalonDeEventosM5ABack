@@ -5,12 +5,17 @@
 package com.m5a.salon.repository;
 
 import com.m5a.salon.model.entity.ImgSalon;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author LaptopSA
  */
-public interface ImgSalonRepository extends JpaRepository<ImgSalon, Integer>{
-    
+public interface ImgSalonRepository extends JpaRepository<ImgSalon, Integer> {
+
+    @Query("SELECT img.imgSalUrl FROM ImgSalon img WHERE img.salon.salId :=salonId")
+    List<String> findUrlsBySalonId(@Param("salonID") int salonId);
 }

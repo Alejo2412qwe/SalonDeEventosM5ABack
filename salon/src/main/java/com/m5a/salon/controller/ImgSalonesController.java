@@ -40,6 +40,11 @@ public class ImgSalonesController {
         return new ResponseEntity<>(imagenesSalonesService.save(img), HttpStatus.CREATED);
     }
 
+    @GetMapping("/urls/{salonId}")
+    public ResponseEntity<List<String>> getUrlsBySalonId(@PathVariable int salonId) {
+        return new ResponseEntity<>(imagenesSalonesService.findUrlsBySalonId(salonId), HttpStatus.OK);
+    }
+
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<ImgSalon> actualizarImg(@PathVariable Integer id, @RequestBody ImgSalon img) {
         ImgSalon imagen = imagenesSalonesService.findById(id);
