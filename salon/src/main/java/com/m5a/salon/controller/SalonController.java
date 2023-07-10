@@ -48,8 +48,25 @@ public class SalonController {
         return ResponseEntity.ok(salonService.buscarPorId(id));
     }
 
+    @PutMapping("/eliminarE/{id}")
+    public ResponseEntity<Salon> actualizarEstadoSalon(@PathVariable Integer id, @RequestBody Salon s) {
+        Salon salon = salonService.findById(id);
+        if (salon != null) {
+            try {
+                salon.setSalEstado(1);
+
+                return new ResponseEntity<>(salonService.save(salon), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Salon> actualizarRol(@PathVariable Integer id, @RequestBody Salon s) {
+    public ResponseEntity<Salon> actualizarSalon(@PathVariable Integer id, @RequestBody Salon s) {
         Salon salon = salonService.findById(id);
         if (salon != null) {
             try {
