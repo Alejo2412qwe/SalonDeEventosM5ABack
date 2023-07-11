@@ -49,12 +49,11 @@ public class SalonController {
     }
 
     @PutMapping("/eliminarE/{id}")
-    public ResponseEntity<Salon> actualizarEstadoSalon(@PathVariable Integer id, @RequestBody Salon s) {
+    public ResponseEntity<Salon> actualizarEstadoSalon(@PathVariable Integer id) {
         Salon salon = salonService.findById(id);
         if (salon != null) {
             try {
-                salon.setSalEstado(1);
-
+                salon.setSalEstado(0);
                 return new ResponseEntity<>(salonService.save(salon), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
