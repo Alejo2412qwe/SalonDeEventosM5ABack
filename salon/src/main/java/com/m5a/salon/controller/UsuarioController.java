@@ -43,12 +43,19 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/busqueda/{busqueda}/{rol}")
+    public ResponseEntity<List<Usuario>> busquedaUsuarios(@PathVariable String busqueda, @PathVariable int rol) {
+        return new ResponseEntity<>(usuarioService.busquedaUsu(busqueda,rol), HttpStatus.OK);
+    }
+
     //LOG IN
     @GetMapping("/login/{usuario}/{password}")
     public ResponseEntity<Usuario> buscarUsuario(@PathVariable String usuario, @PathVariable String password) {
 
         Usuario usuarioEncontrado = new Usuario();
         usuarioEncontrado = usuarioService.buscarUsuario(usuario);
+//        System.out.println("pass= "+usuarioEncontrado.getUsuContrasena());
+//        usuarioEncontrado = usuarioService.LogIn(usuario, password);
 
         System.out.println(usuarioEncontrado.getUsuContrasena() + "==" + password);
         if (PasswordEncoder.matches(password, usuarioEncontrado.getUsuContrasena())) {
@@ -108,14 +115,14 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/eliminarE/{id}")
-    public ResponseEntity<Usuario> actualizarEstado(@PathVariable Integer id) {
+    @PutMapping("/eliminarE/{id}/{estado}")
+    public ResponseEntity<Usuario> actualizarEstado(@PathVariable Integer id, @PathVariable Integer estado) {
         Usuario encontrado = usuarioService.findById(id);
 
         if (encontrado != null) {
 
             try {
-                encontrado.setUsuEstado(0);
+                encontrado.setUsuEstado(estado);
                 return new ResponseEntity<>(usuarioService.save(encontrado), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

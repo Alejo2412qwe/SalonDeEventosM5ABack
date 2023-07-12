@@ -8,6 +8,7 @@ import com.m5a.salon.genericService.GenericService;
 import com.m5a.salon.genericService.GenericServiceImpl;
 import com.m5a.salon.model.entity.Usuario;
 import com.m5a.salon.repository.UsuarioRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
@@ -35,9 +36,9 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
         return usuarioRepository.buscarUsuario(usuario);
     }
 
-//    public int usuarioUnico(String usuario) {
-//        return usuarioRepository.(usuario);
-//    }
+    public List<Usuario> busquedaUsu(String busqueda, int rol){
+        return usuarioRepository.busquedaU(busqueda, rol);
+    }
 
     public boolean usuarioExiste(String usuario) {
 
