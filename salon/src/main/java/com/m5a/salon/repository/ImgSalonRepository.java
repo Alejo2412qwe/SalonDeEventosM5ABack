@@ -16,6 +16,6 @@ import org.springframework.data.repository.query.Param;
  */
 public interface ImgSalonRepository extends JpaRepository<ImgSalon, Integer> {
 
-    @Query(value = "SELECT img.imgSalUrl FROM ImgSalon img WHERE img.salon.salId :=salonId", nativeQuery = true)
-    List<String> findUrlsBySalonId(@Param("salonID") int salonId);
+    @Query(value = "SELECT img_sal_url FROM imagenes_salones WHERE sal_id = :salonId", nativeQuery = true)
+    List<String> findUrlsBySalonId(@Param("salonId") int salonId);
 }
