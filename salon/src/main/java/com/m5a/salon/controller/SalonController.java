@@ -48,6 +48,11 @@ public class SalonController {
         return ResponseEntity.ok(salonService.buscarPorId(id));
     }
 
+    @GetMapping("/busqueda/{busqueda}")
+    public ResponseEntity<List<Salon>> buscarSalon(@PathVariable String busqueda) {
+        return new ResponseEntity<>(salonService.buscarSal(busqueda), HttpStatus.OK);
+    }
+
     @PutMapping("/eliminarE/{id}")
     public ResponseEntity<Salon> actualizarEstadoSalon(@PathVariable Integer id) {
         Salon salon = salonService.findById(id);

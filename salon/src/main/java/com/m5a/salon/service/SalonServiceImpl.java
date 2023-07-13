@@ -8,6 +8,7 @@ import com.m5a.salon.genericService.GenericService;
 import com.m5a.salon.genericService.GenericServiceImpl;
 import com.m5a.salon.model.entity.Salon;
 import com.m5a.salon.repository.SalonRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,9 @@ public class SalonServiceImpl extends GenericServiceImpl<Salon, Integer> impleme
 
     public Salon buscarPorId(int id) {
         return salonRepository.buscarSalonPorID(id);
+    }
+
+    public List<Salon> buscarSal(String busqueda) {
+        return salonRepository.buscarSal(busqueda);
     }
 }
