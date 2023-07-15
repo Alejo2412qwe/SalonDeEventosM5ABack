@@ -24,4 +24,8 @@ public interface SalonRepository extends JpaRepository<Salon, Integer> {
             + "OR LOWER(`salon_direccion`) LIKE CONCAT('%',:busqueda,'%')\n"
             + "OR `sal_costo_hora` LIKE CONCAT('%',:busqueda,'%')", nativeQuery = true)
     List<Salon> buscarSal(@Param("busqueda") String busqueda);
+
+    @Query(value = "SELECT s.* FROM salon s WHERE s.sal_estado= :est", nativeQuery = true)
+    List<Salon> listarXestado(@Param("est") int est);
+
 }
