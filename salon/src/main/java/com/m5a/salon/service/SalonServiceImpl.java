@@ -21,18 +21,22 @@ import org.springframework.stereotype.Service;
 public class SalonServiceImpl extends GenericServiceImpl<Salon, Integer> implements GenericService<Salon, Integer> {
 
     @Autowired
-    public SalonRepository salonRepository;
+    public SalonRepository repository;
 
     @Override
     public CrudRepository<Salon, Integer> getDao() {
-        return salonRepository;
+        return repository;
     }
 
     public Salon buscarPorId(int id) {
-        return salonRepository.buscarSalonPorID(id);
+        return repository.buscarSalonPorID(id);
     }
 
     public List<Salon> buscarSal(String busqueda) {
-        return salonRepository.buscarSal(busqueda);
+        return repository.buscarSal(busqueda);
+    }
+
+    public List<Salon> listarEstado(int est) {
+        return repository.listarXestado(est);
     }
 }
