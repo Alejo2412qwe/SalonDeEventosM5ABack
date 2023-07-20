@@ -36,6 +36,12 @@ public class ReservaController {
         return new ResponseEntity<>(reservaService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/listar/{userId}")
+    public ResponseEntity<List<Object[]>> listarReservacionesPorUsuario(@PathVariable Long userId) {
+        List<Object[]> reservas = reservaService.findCustomReservasByUserId(userId);
+        return new ResponseEntity<>(reservas, HttpStatus.OK);
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<Reserva> crearReservaciones(@RequestBody Reserva r) {
         Timestamp fecha = new Timestamp(System.currentTimeMillis());

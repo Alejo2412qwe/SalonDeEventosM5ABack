@@ -1,4 +1,4 @@
-        /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -8,6 +8,7 @@ import com.m5a.salon.model.entity.Cotizacion;
 import com.m5a.salon.service.CotizacionServiceImpl;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,12 @@ public class CotizacionController {
     @GetMapping("/listar")
     public ResponseEntity<List<Cotizacion>> listarCotizaciones() {
         return new ResponseEntity<>(cotizacionService.findByAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/cotizaciones-usuario/{usuarioId}")
+    public ResponseEntity<List<Map<String, Object>>> getCotizacionesByUsuarioId(@PathVariable Long usuarioId) {
+        List<Map<String, Object>> cotizaciones = cotizacionService.findCotizacionesByUsuarioId(usuarioId);
+        return new ResponseEntity<>(cotizaciones, HttpStatus.OK);
     }
 
     @PostMapping("/crear")

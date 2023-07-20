@@ -58,7 +58,6 @@ public class Reserva implements Serializable {
     @JoinColumn(name = "reCotiId")
     private Cotizacion reCotiId;
 
-    @JsonIgnore
     @Column(name = "resFechaEvento")
     private Date resFechaEvento;
 
