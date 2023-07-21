@@ -5,6 +5,7 @@
 package com.m5a.salon.controller;
 
 import com.m5a.salon.model.entity.Cotizacion;
+import com.m5a.salon.repository.CotizacionRepository;
 import com.m5a.salon.service.CotizacionServiceImpl;
 import java.sql.Timestamp;
 import java.util.List;
@@ -41,6 +42,17 @@ public class CotizacionController {
     public ResponseEntity<List<Map<String, Object>>> getCotizacionesByUsuarioId(@PathVariable Long usuarioId) {
         List<Map<String, Object>> cotizaciones = cotizacionService.findCotizacionesByUsuarioId(usuarioId);
         return new ResponseEntity<>(cotizaciones, HttpStatus.OK);
+    }
+
+    @Autowired
+    private CotizacionRepository repository;
+
+    @PostMapping("/crearcoti")
+    public Cotizacion crearCotizacion(@RequestBody Cotizacion cotizacion) {
+        Timestamp fecha = new Timestamp(System.currentTimeMillis());
+        cotizacion.setCotiFechaRegistro(fecha);
+
+        return repository.save(cotizacion);
     }
 
     @PostMapping("/crear")

@@ -19,15 +19,15 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author LaptopSA
  */
 @Entity
-@Data
 @AllArgsConstructor
 @Table(name = "Reserva")
 @NoArgsConstructor
@@ -40,27 +40,46 @@ public class Reserva implements Serializable {
     /**
      *
      */
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservaId")
     private Long resId;
 
+    @Getter
+    @Setter
     @Column(name = "resEstado")
     private int resEstado;
 
+    @Getter
+    @Setter
+    private int resImagenRerserva;
+
+    @Getter
+    @Setter
     @Column(name = "resComprobante")
     private String resComprobante;
 
+    @Getter
+    @Setter
     @Column(name = "resFechaRegistro")
     private Timestamp resFechaRegistro;
 
+    @Getter
+    @Setter
     @OneToOne
     @JoinColumn(name = "reCotiId")
     private Cotizacion reCotiId;
 
+    @Getter
+    @Setter
+    @JsonIgnore
     @Column(name = "resFechaEvento")
     private Date resFechaEvento;
 
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")
     private Usuario usuId;
