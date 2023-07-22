@@ -31,7 +31,6 @@ public class CotizacionServiceImpl extends GenericServiceImpl<Cotizacion, Intege
         return cotizacionRepository;
     }
 
-    // Implementa métodos adicionales si los necesitas
     public List<Map<String, Object>> findCotizacionesByUsuarioId(Long usuarioId) {
         List<Object[]> cotizaciones = cotizacionRepository.findCotizacionesByUsuarioId(usuarioId);
 
@@ -39,9 +38,10 @@ public class CotizacionServiceImpl extends GenericServiceImpl<Cotizacion, Intege
 
         for (Object[] cotizacion : cotizaciones) {
             Map<String, Object> cotizacionMap = new HashMap<>();
-            cotizacionMap.put("salonNombre", cotizacion[0]);
-            cotizacionMap.put("monto", cotizacion[1]);
-            cotizacionMap.put("fechaReserva", cotizacion[2]);
+            cotizacionMap.put("cotiId", cotizacion[0]);
+            cotizacionMap.put("salonNombre", cotizacion[1]);
+            cotizacionMap.put("monto", cotizacion[2]);
+            cotizacionMap.put("fechaReserva", cotizacion[3]);
             result.add(cotizacionMap);
         }
 

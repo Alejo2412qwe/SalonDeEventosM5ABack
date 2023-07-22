@@ -16,7 +16,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface CotizacionRepository extends JpaRepository<Cotizacion, Integer> {
 
-    @Query("SELECT c.salId.salNombre AS salonNombre, c.cotiMonto AS monto, c.cotiFechaEvento AS fechaReserva "
+    @Query("SELECT c.cotiId AS cotiId, c.salId.salNombre AS salonNombre, c.cotiMonto AS monto, c.cotiFechaEvento AS fechaReserva "
             + "FROM Cotizacion c "
             + "WHERE c.usuId.usuId = :usuarioId")
     List<Object[]> findCotizacionesByUsuarioId(@Param("usuarioId") Long usuarioId);
