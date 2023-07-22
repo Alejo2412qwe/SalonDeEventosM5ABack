@@ -20,5 +20,11 @@ public interface ImgProductosRepository extends JpaRepository<ImgProducto, Integ
             + "FROM imagenes_productos i "
             + "JOIN producto_servicio p ON i.prod_id = p.prod_id "
             + "WHERE p.prod_id= :prod", nativeQuery = true)
-    List<ImgProducto> imgProdId(@Param("prod") int prod); 
+    List<ImgProducto> imgProdId(@Param("prod") int prod);
+
+    @Query(value = "SELECT i.* "
+            + "FROM imagenes_productos i "
+            + "JOIN producto_servicio p ON i.prod_id = p.prod_id "
+            + "WHERE  p.prod_estado= :est", nativeQuery = true)
+    List<ImgProducto> imgProdEst(@Param("est") int est);
 }

@@ -54,6 +54,7 @@ public class Reserva implements Serializable {
 
     @Getter
     @Setter
+    @Column(name = "resImagenRerserva")
     private int resImagenRerserva;
 
     @Getter
@@ -74,12 +75,11 @@ public class Reserva implements Serializable {
 
     @Getter
     @Setter
-    @JsonIgnore
     @Column(name = "resFechaEvento")
     private Date resFechaEvento;
 
     @Getter
-    @Setter
+    @Setter 
     @ManyToOne
     @JoinColumn(name = "usuId", referencedColumnName = "usuId")
     private Usuario usuId;

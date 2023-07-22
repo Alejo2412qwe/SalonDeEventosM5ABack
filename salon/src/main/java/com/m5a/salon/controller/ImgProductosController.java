@@ -38,7 +38,12 @@ public class ImgProductosController {
     @GetMapping("/busqueda/{prod}")
     public ResponseEntity<List<ImgProducto>> imgProdId(@PathVariable int prod) {
         return new ResponseEntity<>(imagenesProductosService.imgProdId(prod), HttpStatus.OK);
-    } 
+    }
+
+    @GetMapping("/busquedaEst/{est}")
+    public ResponseEntity<List<ImgProducto>> imgProdEst(@PathVariable int est) {
+        return new ResponseEntity<>(imagenesProductosService.imgProdEst(est), HttpStatus.OK);
+    }
 
     @PostMapping("/crear")
     public ResponseEntity<ImgProducto> crearImg(@RequestBody ImgProducto img) {

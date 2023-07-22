@@ -30,6 +30,19 @@ public class ReservaServiceImpl extends GenericServiceImpl<Reserva, Integer> imp
 
     public List<Object[]> findCustomReservasByUserId(Long userId) {
         return reservaRepository.findCustomReservasByUserId(userId);
+    }
 
+    public boolean fechaOcupada(int dia, int mes, int anio) {
+
+        int fechaOcu = reservaRepository.fechaOcupada(dia, mes, anio);
+        if (fechaOcu > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public List<Reserva> listarEst(int est) {
+        return reservaRepository.listarEst(est);
     }
 }

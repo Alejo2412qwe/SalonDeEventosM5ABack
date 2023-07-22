@@ -38,6 +38,11 @@ public class CotizacionController {
         return new ResponseEntity<>(cotizacionService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/buscar/{id}")
+    public Cotizacion buscarUsuId(@PathVariable Integer id) {
+        return cotizacionService.findById(id);
+    }
+
     @GetMapping("/cotizaciones-usuario/{usuarioId}")
     public ResponseEntity<List<Map<String, Object>>> getCotizacionesByUsuarioId(@PathVariable Long usuarioId) {
         List<Map<String, Object>> cotizaciones = cotizacionService.findCotizacionesByUsuarioId(usuarioId);

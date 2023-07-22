@@ -31,4 +31,8 @@ public class ImagenesProductosService extends GenericServiceImpl<ImgProducto, In
     public List<ImgProducto> imgProdId(int prod) {
         return imgProductosRepository.imgProdId(prod);
     }
+
+    public List<ImgProducto> imgProdEst(int est) {
+        return imgProductosRepository.imgProdEst(est);
+    }
 }

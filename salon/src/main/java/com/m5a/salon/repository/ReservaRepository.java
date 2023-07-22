@@ -18,4 +18,14 @@ public interface ReservaRepository extends JpaRepository<Reserva, Integer> {
 
     @Query("SELECT r.resFechaEvento, r.reCotiId.cotiTipoEvento, r.resEstado, r.reCotiId.cotiMonto, r.reCotiId.salId.salNombre FROM Reserva r WHERE r.usuId.usuId = :userId")
     List<Object[]> findCustomReservasByUserId(@Param("userId") Long userId);
+
+    @Query(value = "SELECT COUNT(*) "
+            + "FROM reserva "
+            + "WHERE DAY(res_fecha_evento) = :dia "
+            + "  AND MONTH(res_fecha_evento) = :mes "
+            + "  AND YEAR(res_fecha_evento) = :anio", nativeQuery = true)
+    int fechaOcupada(@Param("dia") int dia, @Param("mes") int mes, @Param("anio") int anio);
+
+    @Query(value = "SELECT * FROM reserva WHERE res_estado= :est", nativeQuery = true)
+    List<Reserva> listarEst(@Param("est") int est);
 }

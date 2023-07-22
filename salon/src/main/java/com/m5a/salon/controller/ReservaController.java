@@ -36,14 +36,32 @@ public class ReservaController {
         return new ResponseEntity<>(reservaService.findByAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/buscar/{id}")
+    public Reserva buscarUsuId(@PathVariable Integer id) {
+        return reservaService.findById(id);
+    }
+
     @GetMapping("/listar/{userId}")
     public ResponseEntity<List<Object[]>> listarReservacionesPorUsuario(@PathVariable Long userId) {
         List<Object[]> reservas = reservaService.findCustomReservasByUserId(userId);
         return new ResponseEntity<>(reservas, HttpStatus.OK);
     }
 
+    @GetMapping("/fechaOcupada/{dia}/{mes}/{anio}")
+    public ResponseEntity<Boolean> fechaOcupada(@PathVariable int dia, @PathVariable int mes, @PathVariable int anio) {
+
+        return ResponseEntity.ok(reservaService.fechaOcupada(dia, mes, anio));
+    }
+
+    @GetMapping("/listarEst/{est}")
+    public ResponseEntity<List<Reserva>> listarReservaEst(@PathVariable int est) {
+        return new ResponseEntity<>(reservaService.listarEst(est), HttpStatus.OK);
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<Reserva> crearReservaciones(@RequestBody Reserva r) {
+        System.out.println("fechaEVENTO= " + r.getResFechaEvento());
+
         Timestamp fecha = new Timestamp(System.currentTimeMillis());
         r.setResFechaRegistro(fecha);
         return new ResponseEntity<>(reservaService.save(r), HttpStatus.CREATED);
