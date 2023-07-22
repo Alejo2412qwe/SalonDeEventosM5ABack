@@ -76,12 +76,12 @@ public class Cotizacion implements Serializable {
     @Getter
     @Setter
     @Column(name = "cotiHoraFin")
-    private Date cotiHoraFin;
+    private String cotiHoraFin;
 
     @Getter
     @Setter
     @Column(name = "cotiHoraInicio")
-    private Date cotiHoraInicio;
+    private String cotiHoraInicio;
 
     @Getter
     @Setter
