@@ -39,8 +39,13 @@ public class CotizacionController {
     }
 
     @GetMapping("/buscar/{id}")
-    public Cotizacion buscarUsuId(@PathVariable Integer id) {
+    public Cotizacion buscarCotId(@PathVariable Integer id) {
         return cotizacionService.findById(id);
+    }
+
+    @GetMapping("/misCotizacion/{id}")
+    public ResponseEntity<List<Cotizacion>> misCotizacion(@PathVariable int id) {
+        return new ResponseEntity<>(cotizacionService.misCotizacion(id), HttpStatus.OK);
     }
 
     @GetMapping("/cotizaciones-usuario/{usuarioId}")

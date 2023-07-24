@@ -45,4 +45,8 @@ public class ReservaServiceImpl extends GenericServiceImpl<Reserva, Integer> imp
     public List<Reserva> listarEst(int est) {
         return reservaRepository.listarEst(est);
     }
+
+    public List<Reserva> misReservas(int id, int est) {
+        return reservaRepository.misReservas(id, est);
+    }
 }

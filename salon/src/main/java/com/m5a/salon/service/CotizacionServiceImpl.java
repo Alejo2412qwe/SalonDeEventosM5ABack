@@ -47,4 +47,8 @@ public class CotizacionServiceImpl extends GenericServiceImpl<Cotizacion, Intege
 
         return result;
     }
+
+    public List<Cotizacion> misCotizacion(int id) {
+        return cotizacionRepository.misCotizacion(id);
+    }
 }

@@ -58,6 +58,11 @@ public class ReservaController {
         return new ResponseEntity<>(reservaService.listarEst(est), HttpStatus.OK);
     }
 
+    @GetMapping("/misReservas/{id}/{est}")
+    public ResponseEntity<List<Reserva>> misReservas(@PathVariable int id, @PathVariable int est) {
+        return new ResponseEntity<>(reservaService.misReservas(id, est), HttpStatus.OK);
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<Reserva> crearReservaciones(@RequestBody Reserva r) {
         System.out.println("fechaEVENTO= " + r.getResFechaEvento());
@@ -78,6 +83,23 @@ public class ReservaController {
                 reserva.setReCotiId(r.getReCotiId());
                 reserva.setUsuId(r.getUsuId());
                 reserva.setResFechaRegistro(r.getResFechaRegistro());
+
+                return new ResponseEntity<>(reservaService.save(reserva), HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/validarReserva/{id}/{est}")
+    public ResponseEntity<Reserva> validarReserva(@PathVariable Integer id, @PathVariable Integer est) {
+        Reserva reserva = reservaService.findById(id);
+        if (reserva != null) {
+            try {
+                reserva.setResEstado(est);
 
                 return new ResponseEntity<>(reservaService.save(reserva), HttpStatus.CREATED);
             } catch (Exception e) {
