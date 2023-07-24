@@ -53,7 +53,7 @@ public class SalonApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 //        fileService.deleteAll();
-//        fileService.init();
+//        fileService.init();   
     }
 
 }
