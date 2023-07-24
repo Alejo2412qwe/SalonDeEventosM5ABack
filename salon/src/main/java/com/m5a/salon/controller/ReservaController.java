@@ -95,11 +95,13 @@ public class ReservaController {
     }
 
     @PutMapping("/validarReserva/{id}/{est}")
-    public ResponseEntity<Reserva> validarReserva(@PathVariable Integer id, @PathVariable Integer est) {
+    public ResponseEntity<Reserva> validarReserva(@PathVariable Integer id, @PathVariable Integer est, @RequestBody Reserva r) {
         Reserva reserva = reservaService.findById(id);
+        System.out.println("res= "+ r.getUsuId().getUsuNombreUsuario());
         if (reserva != null) {
             try {
                 reserva.setResEstado(est);
+                reserva.setUsuId(r.getUsuId());
 
                 return new ResponseEntity<>(reservaService.save(reserva), HttpStatus.CREATED);
             } catch (Exception e) {
@@ -110,6 +112,8 @@ public class ReservaController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
+    
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Reserva> elimiarReservaciones(@PathVariable Integer id) {

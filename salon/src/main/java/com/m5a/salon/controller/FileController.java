@@ -20,11 +20,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,6 +64,26 @@ public class FileController {
 //            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new FileMessage(message));
 //        }
 //    }
+//    @PostMapping("/upload")
+//    public ResponseEntity<List<FileModel>> uploadFiles(@RequestParam("files") MultipartFile[] files) {
+//        String message = "";
+//        List<String> fileNames = new ArrayList<>();
+//
+//        List<FileModel> archivos = new ArrayList<>();
+//
+//        Arrays.asList(files).stream().forEach(file -> {
+//            fileService.save(file);
+//            fileNames.add(file.getOriginalFilename());
+//
+//            FileModel fileModel = new FileModel();
+//            fileModel.setName(file.getOriginalFilename());
+//            archivos.add(fileModel);
+//        });
+//
+//        message = "Se subieron los archivos correctamente " + fileNames;
+//
+//        return new ResponseEntity<>(archivos, HttpStatus.OK);
+//    }
     @PostMapping("/upload")
     public ResponseEntity<List<FileModel>> uploadFiles(@RequestParam("files") MultipartFile[] files) {
         String message = "";
@@ -68,17 +92,37 @@ public class FileController {
         List<FileModel> archivos = new ArrayList<>();
 
         Arrays.asList(files).stream().forEach(file -> {
-            fileService.save(file);
-            fileNames.add(file.getOriginalFilename());
-
-            FileModel fileModel = new FileModel();
-            fileModel.setName(file.getOriginalFilename());
-            archivos.add(fileModel);
+            try {
+                String originalFileName = file.getOriginalFilename();
+                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+                String uniqueFileName = UUID.randomUUID().toString() + fileExtension;
+                
+                // Cambiar el nombre original del archivo
+                MultipartFile renamedFile = changeFileName(file, uniqueFileName);
+                
+                fileService.save(renamedFile);
+                fileNames.add(uniqueFileName);
+                
+                FileModel fileModel = new FileModel();
+                fileModel.setName(uniqueFileName);
+                archivos.add(fileModel);
+            } catch (IOException ex) {
+                Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         message = "Se subieron los archivos correctamente " + fileNames;
 
         return new ResponseEntity<>(archivos, HttpStatus.OK);
+    }
+
+    public MultipartFile changeFileName(MultipartFile file, String newFileName) throws IOException {
+        return new MockMultipartFile(
+                newFileName,
+                newFileName,
+                file.getContentType(),
+                file.getInputStream()
+        );
     }
 
     @GetMapping("/files")
