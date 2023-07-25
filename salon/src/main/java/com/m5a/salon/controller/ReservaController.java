@@ -95,12 +95,14 @@ public class ReservaController {
     }
 
     @PutMapping("/validarReserva/{id}/{est}")
-    public ResponseEntity<Reserva> validarReserva(@PathVariable Integer id, @PathVariable Integer est) {
+    public ResponseEntity<Reserva> validarReserva(@PathVariable Integer id, @PathVariable Integer est, @RequestBody Reserva r ) {
         Reserva reserva = reservaService.findById(id);
         if (reserva != null) {
             try {
                 reserva.setResEstado(est);
-
+                reserva.setUsuId(r.getUsuId());
+                
+                System.out.println("empleado: "+reserva.getUsuId().getUsuId());
                 return new ResponseEntity<>(reservaService.save(reserva), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

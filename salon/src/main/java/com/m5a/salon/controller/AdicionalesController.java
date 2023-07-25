@@ -43,6 +43,11 @@ public class AdicionalesController {
         return new ResponseEntity<>(adicionalesService.save(a), HttpStatus.CREATED);
     }
 
+    @GetMapping("/adicionalesCoti/{id}")
+    public ResponseEntity<List<Adicionales>> adicionalesCoti(@PathVariable int id) {
+        return new ResponseEntity<>(adicionalesService.adicionalesCoti(id), HttpStatus.OK);
+    }
+
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<Adicionales> actualizarAdicionales(@PathVariable Integer id, @RequestBody Adicionales a) {
         Adicionales adicionales = adicionalesService.findById(id);
