@@ -23,4 +23,7 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Integer>
 
     @Query(value = "SELECT * FROM cotizacion WHERE usu_id = :id ORDER BY coti_fecha_evento ASC", nativeQuery = true)
     List<Cotizacion> misCotizacion(@Param("id") int id);
+
+    @Query(value = "SELECT COUNT(*) FROM reserva WHERE re_coti_id = :cot", nativeQuery = true)
+    int cotizacionReservada(@Param("cot") int usuario);
 }

@@ -51,4 +51,14 @@ public class CotizacionServiceImpl extends GenericServiceImpl<Cotizacion, Intege
     public List<Cotizacion> misCotizacion(int id) {
         return cotizacionRepository.misCotizacion(id);
     }
+    
+    public boolean cotizacionReservada(int idCot) {
+
+        int count = cotizacionRepository.cotizacionReservada(idCot);
+        if (count > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

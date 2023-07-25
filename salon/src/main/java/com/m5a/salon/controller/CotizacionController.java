@@ -48,6 +48,12 @@ public class CotizacionController {
         return new ResponseEntity<>(cotizacionService.misCotizacion(id), HttpStatus.OK);
     }
 
+    @GetMapping("/cotizacionReservada/{idCot}")
+    public ResponseEntity<Boolean> cotizacionReservada(@PathVariable int idCot) {
+
+        return ResponseEntity.ok(cotizacionService.cotizacionReservada(idCot));
+    }
+
     @GetMapping("/cotizaciones-usuario/{usuarioId}")
     public ResponseEntity<List<Map<String, Object>>> getCotizacionesByUsuarioId(@PathVariable Long usuarioId) {
         List<Map<String, Object>> cotizaciones = cotizacionService.findCotizacionesByUsuarioId(usuarioId);
