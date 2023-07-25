@@ -29,6 +29,6 @@ public interface ReservaRepository extends JpaRepository<Reserva, Integer> {
     @Query(value = "SELECT r.* FROM reserva r JOIN cotizacion c ON (r.re_coti_id=c.coti_id) WHERE c.usu_id= :id AND r.res_estado= :est", nativeQuery = true)
     List<Reserva> misReservas(@Param("id") int id, @Param("est") int est);
 
-    @Query(value = "SELECT r.* FROM reserva r JOIN cotizacion c ON (r.re_coti_id=c.coti_id) WHERE c.usu_id= :id AND r.res_estado= :est", nativeQuery = true)
-    List<Object[]> findCustomReservasByUserIdAndState(@Param("userId") Long userId, @Param("est") Long est);
+    @Query(value = "SELECT r.* FROM reserva r JOIN cotizacion c ON (r.re_coti_id=c.coti_id) WHERE c.usu_id= :id", nativeQuery = true)
+    List<Object[]> findCustomReservasByUserIdAndState(@Param("userId") Long userId);
 }

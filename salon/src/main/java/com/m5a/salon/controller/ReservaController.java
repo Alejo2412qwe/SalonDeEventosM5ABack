@@ -42,8 +42,8 @@ public class ReservaController {
     }
 
     @GetMapping("/listar/{userId}/{est}")
-    public ResponseEntity<List<Object[]>> ListarReservasMovilPorIdyEstado(@PathVariable Long userId, Long est) {
-        List<Object[]> reservas = reservaService.findCustomReservasByUserIdAndState(userId, est);
+    public ResponseEntity<List<Object[]>> ListarReservasMovilPorIdyEstado(@PathVariable Long userId) {
+        List<Object[]> reservas = reservaService.findCustomReservasByUserIdAndState(userId);
         return new ResponseEntity<>(reservas, HttpStatus.OK);
     }
 
