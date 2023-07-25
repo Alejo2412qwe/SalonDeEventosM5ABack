@@ -28,8 +28,8 @@ public class ReservaServiceImpl extends GenericServiceImpl<Reserva, Integer> imp
         return reservaRepository;
     }
 
-    public List<Object[]> findCustomReservasByUserId(Long userId) {
-        return reservaRepository.findCustomReservasByUserId(userId);
+    public List<Object[]> findCustomReservasByUserIdAndState(Long userId, Long est) {
+        return reservaRepository.findCustomReservasByUserIdAndState(userId, est);
     }
 
     public boolean fechaOcupada(int dia, int mes, int anio) {

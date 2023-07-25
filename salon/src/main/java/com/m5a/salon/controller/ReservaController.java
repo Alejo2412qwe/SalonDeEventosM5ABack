@@ -41,15 +41,9 @@ public class ReservaController {
         return reservaService.findById(id);
     }
 
-    @GetMapping("/listar/{userId}")
-    public ResponseEntity<List<Object[]>> listarReservacionesPorUsuario(@PathVariable Long userId) {
-        List<Object[]> reservas = reservaService.findCustomReservasByUserId(userId);
-        return new ResponseEntity<>(reservas, HttpStatus.OK);
-    }
-
-    @GetMapping("/listar/{userId}")
-    public ResponseEntity<List<Object[]>> ListarReservasMovil(@PathVariable Long userId) {
-        List<Object[]> reservas = reservaService.findCustomReservasByUserId(userId);
+    @GetMapping("/listar/{userId}/{est}")
+    public ResponseEntity<List<Object[]>> ListarReservasMovilPorIdyEstado(@PathVariable Long userId, Long est) {
+        List<Object[]> reservas = reservaService.findCustomReservasByUserIdAndState(userId, est);
         return new ResponseEntity<>(reservas, HttpStatus.OK);
     }
 
