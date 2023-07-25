@@ -47,6 +47,12 @@ public class ReservaController {
         return new ResponseEntity<>(reservas, HttpStatus.OK);
     }
 
+    @GetMapping("/listar/{userId}")
+    public ResponseEntity<List<Object[]>> ListarReservasMovil(@PathVariable Long userId) {
+        List<Object[]> reservas = reservaService.findCustomReservasByUserId(userId);
+        return new ResponseEntity<>(reservas, HttpStatus.OK);
+    }
+
     @GetMapping("/fechaOcupada/{dia}/{mes}/{anio}")
     public ResponseEntity<Boolean> fechaOcupada(@PathVariable int dia, @PathVariable int mes, @PathVariable int anio) {
 
@@ -95,14 +101,14 @@ public class ReservaController {
     }
 
     @PutMapping("/validarReserva/{id}/{est}")
-    public ResponseEntity<Reserva> validarReserva(@PathVariable Integer id, @PathVariable Integer est, @RequestBody Reserva r ) {
+    public ResponseEntity<Reserva> validarReserva(@PathVariable Integer id, @PathVariable Integer est, @RequestBody Reserva r) {
         Reserva reserva = reservaService.findById(id);
         if (reserva != null) {
             try {
                 reserva.setResEstado(est);
                 reserva.setUsuId(r.getUsuId());
-                
-                System.out.println("empleado: "+reserva.getUsuId().getUsuId());
+
+                System.out.println("empleado: " + reserva.getUsuId().getUsuId());
                 return new ResponseEntity<>(reservaService.save(reserva), HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
