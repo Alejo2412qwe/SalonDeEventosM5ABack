@@ -68,9 +68,9 @@ public class ReservaController {
         return new ResponseEntity<>(reservaService.misReservas(id, est), HttpStatus.OK);
     }
 
-    @GetMapping("/reservaFechas/{ini}/{fin}")
-    public ResponseEntity<List<Reserva>> reservaFechas(@PathVariable String ini, @PathVariable String fin) {
-        return new ResponseEntity<>(reservaService.reservaFechas(ini, fin), HttpStatus.OK);
+    @GetMapping("/reservaFechas/{ini}/{fin}/{est}")
+    public ResponseEntity<List<Reserva>> reservaFechas(@PathVariable String ini, @PathVariable String fin, @PathVariable int est) {
+        return new ResponseEntity<>(reservaService.reservaFechas(ini, fin, est), HttpStatus.OK);
     }
 
     @PostMapping("/crear")

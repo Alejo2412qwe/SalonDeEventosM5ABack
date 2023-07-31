@@ -54,8 +54,8 @@ public class ReservaServiceImpl extends GenericServiceImpl<Reserva, Integer> imp
         return reservaRepository.misReservas(id, est);
     }
 
-    public List<Reserva> reservaFechas(String ini, String fin) {
-        return reservaRepository.reservaFechas(ini, fin);
+    public List<Reserva> reservaFechas(String ini, String fin, int est) {
+        return reservaRepository.reservaFechas(ini, fin, est);
     }
 
 }

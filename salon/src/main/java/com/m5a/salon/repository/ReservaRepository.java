@@ -35,8 +35,9 @@ public interface ReservaRepository extends JpaRepository<Reserva, Integer> {
     @Query(value = "SELECT *  "
             + "FROM reserva  "
             + "WHERE DATE(res_fecha_registro)>= :ini  "
-            + "AND DATE(res_fecha_registro) <= :fin", nativeQuery = true)
-    List<Reserva> reservaFechas(@Param("ini") String ini, @Param("fin") String fin);
+            + "AND DATE(res_fecha_registro) <= :fin "
+            + "AND res_estado= :est", nativeQuery = true)
+    List<Reserva> reservaFechas(@Param("ini") String ini, @Param("fin") String fin, @Param("est") int est);
 
     @Query(value = "SELECT (COUNT(*)+1) FROM reserva", nativeQuery = true)
     int numReserva();
