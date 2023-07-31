@@ -153,11 +153,11 @@ public class ReservaController {
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setTo(destinatario);
-            helper.setSubject("Comprobante");
-            helper.setText("Adjunto encontrarás el reporte de reservas.");
+            helper.setSubject("Estado de Reserva");
+            helper.setText("Adjunto encontrarás el estado actual de tu reserva.");
 
             // Agregar el PDF como archivo adjunto
-            helper.addAttachment("reporte.pdf", new ByteArrayResource(pdfBytes));
+            helper.addAttachment("Estado_Reseva.pdf", new ByteArrayResource(pdfBytes));
 
             // Enviar el correo
             javaMailSender.send(message);

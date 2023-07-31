@@ -40,17 +40,23 @@ public class PersonaController {
 
     @PostMapping("/crear")
     public ResponseEntity<Persona> crearPersona(@RequestBody Persona p) {
-        boolean ban = personaService.siExisteCedula(p.getPerCedula());
-        if (ban) {
-            return new ResponseEntity<>(personaService.save(p), HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+//        boolean ban = personaService.siExisteCedula(p.getPerCedula());
+//        if (ban) {
+        return new ResponseEntity<>(personaService.save(p), HttpStatus.CREATED);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
     }
 
     @GetMapping("/ultimoregistro")
     public ResponseEntity<Integer> ultimoRegistro() {
         return ResponseEntity.ok(personaService.ultimoRegistro());
+    }
+
+    @GetMapping("/cedulaRegistra/{cedula}")
+    public ResponseEntity<Boolean> siExisteCedula(@PathVariable String cedula) {
+
+        return ResponseEntity.ok(personaService.siExisteCedula(cedula));
     }
 
     @PutMapping("/actualizar/{id}")
