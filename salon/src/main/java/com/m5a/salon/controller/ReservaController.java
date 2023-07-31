@@ -8,17 +8,26 @@ import com.m5a.salon.model.entity.Reserva;
 import com.m5a.salon.service.ReservaServiceImpl;
 import java.sql.Timestamp;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import java.util.Base64;
 
 /**
  *
@@ -40,9 +49,9 @@ public class ReservaController {
     public Reserva buscarUsuId(@PathVariable Integer id) {
         return reservaService.findById(id);
     }
-    
+
     @GetMapping("/numReserva")
-    public int numReserva(){
+    public int numReserva() {
         return reservaService.numReserva();
     }
 
@@ -128,4 +137,36 @@ public class ReservaController {
         reservaService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @PostMapping("/enviar-correo")
+    public ResponseEntity<String> enviarCorreoConPDF(@RequestBody String pdfData, @RequestParam String destinatario) {
+        System.out.println("====================");
+        System.out.println(pdfData);
+        try {
+            // Decodificar el PDF desde base64
+            byte[] pdfBytes = Base64.getDecoder().decode(pdfData);
+
+            // Crear el mensaje de correo con el PDF adjunto
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setTo(destinatario);
+            helper.setSubject("Comprobante");
+            helper.setText("Adjunto encontrarás el reporte de reservas.");
+
+            // Agregar el PDF como archivo adjunto
+            helper.addAttachment("reporte.pdf", new ByteArrayResource(pdfBytes));
+
+            // Enviar el correo
+            javaMailSender.send(message);
+
+            return ResponseEntity.ok("Correo enviado correctamente.");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el correo.");
+        }
+    }
+
 }
