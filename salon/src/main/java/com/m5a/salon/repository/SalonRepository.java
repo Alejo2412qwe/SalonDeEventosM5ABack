@@ -19,11 +19,24 @@ public interface SalonRepository extends JpaRepository<Salon, Integer> {
     @Query(value = "SELECT * FROM salon WHERE sal_id = :id", nativeQuery = true)
     Salon buscarSalonPorID(@Param("id") Integer id);
 
-    @Query(value = "SELECT * FROM `salon` WHERE `sal_estado` = 1\n"
-            + "AND LOWER(`sal_nombre`) LIKE CONCAT('%',:busqueda,'%')\n"
-            + "OR LOWER(`salon_direccion`) LIKE CONCAT('%',:busqueda,'%')\n"
-            + "OR `sal_costo_hora` LIKE CONCAT('%',:busqueda,'%')", nativeQuery = true)
-    List<Salon> buscarSal(@Param("busqueda") String busqueda);
+    @Query(value = "SELECT * FROM salon "
+            + "WHERE sal_estado = :est "
+            + "AND (LOWER(sal_nombre) LIKE CONCAT('%', :busqueda, '%') "
+            + "     OR LOWER(salon_direccion) LIKE CONCAT('%', :busqueda, '%') "
+            + "     OR sal_costo_hora LIKE CONCAT('%', :busqueda, '%'))", nativeQuery = true)
+    List<Salon> buscarSal(@Param("busqueda") String busqueda, @Param("est") int est);
+
+    @Query(value = "SELECT p.* "
+            + "FROM producto_servicio p "
+            + "JOIN tipo t ON p.tip_id= t.tip_id "
+            + "JOIN categoria c ON c.cat_id= p.cat_id "
+            + "WHERE p.prod_estado = :est "
+            + "AND (LOWER(p.prod_nombre) LIKE CONCAT('%', :busqueda, '%') "
+            + "     OR LOWER(p.prod_descripcion) LIKE CONCAT('%', :busqueda, '%') "
+            + "     OR LOWER(c.cat_nombre) LIKE CONCAT('%', :busqueda, '%') "
+            + "     OR LOWER(t.tip_nombre) LIKE CONCAT('%', :busqueda, '%') "
+            + ")", nativeQuery = true)
+    List<Salon> busquedaPS(@Param("busqueda") String busqueda, @Param("est") int est);
 
     @Query(value = "SELECT s.* FROM salon s WHERE s.sal_estado= :est", nativeQuery = true)
     List<Salon> listarXestado(@Param("est") int est);

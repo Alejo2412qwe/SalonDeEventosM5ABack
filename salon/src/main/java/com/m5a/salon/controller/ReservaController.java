@@ -141,8 +141,35 @@ public class ReservaController {
     @Autowired
     private JavaMailSender javaMailSender;
 
+//    @PostMapping("/enviar-correo")
+//    public ResponseEntity<String> enviarCorreoConPDF(@RequestBody String pdfData, @RequestParam String destinatario) {
+//        System.out.println("====================");
+//        System.out.println(pdfData);
+//        try {
+//            // Decodificar el PDF desde base64
+//            byte[] pdfBytes = Base64.getDecoder().decode(pdfData);
+//
+//            // Crear el mensaje de correo con el PDF adjunto
+//            MimeMessage message = javaMailSender.createMimeMessage();
+//            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+//            helper.setTo(destinatario);
+//            helper.setSubject("Estado de Reserva");
+//            helper.setText("Adjunto encontrarás el estado actual de tu reserva.");
+//
+//            // Agregar el PDF como archivo adjunto
+//            helper.addAttachment("Estado_Reseva.pdf", new ByteArrayResource(pdfBytes));
+//
+//            // Enviar el correo
+//            javaMailSender.send(message);
+//
+//            return ResponseEntity.ok("Correo enviado correctamente.");
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el correo.");
+//        }
+//    }
     @PostMapping("/enviar-correo")
-    public ResponseEntity<String> enviarCorreoConPDF(@RequestBody String pdfData, @RequestParam String destinatario) {
+        public ResponseEntity<String> enviarCorreoConPDF(@RequestBody String pdfData, @RequestParam String destinatario, @RequestParam String estado) {
         System.out.println("====================");
         System.out.println(pdfData);
         try {
@@ -154,8 +181,8 @@ public class ReservaController {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setTo(destinatario);
             helper.setSubject("Estado de Reserva");
-            helper.setText("Adjunto encontrarás el estado actual de tu reserva.");
-
+            helper.setText("Su reserva se encuentra en estado: "+ estado+"\nAdjunto encontrarás más detalles de tu reserva.");
+            helper.setPriority(1);
             // Agregar el PDF como archivo adjunto
             helper.addAttachment("Estado_Reseva.pdf", new ByteArrayResource(pdfBytes));
 

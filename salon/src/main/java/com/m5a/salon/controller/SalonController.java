@@ -53,9 +53,9 @@ public class SalonController {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
 
-    @GetMapping("/busqueda/{busqueda}")
-    public ResponseEntity<List<Salon>> buscarSalon(@PathVariable String busqueda) {
-        return new ResponseEntity<>(service.buscarSal(busqueda), HttpStatus.OK);
+    @GetMapping("/busqueda/{busqueda}/{est}")
+    public ResponseEntity<List<Salon>> buscarSalon(@PathVariable String busqueda,@PathVariable int est) {
+        return new ResponseEntity<>(service.buscarSal(busqueda,est), HttpStatus.OK);
     }
 
     @PutMapping("/actualizar/{id}")

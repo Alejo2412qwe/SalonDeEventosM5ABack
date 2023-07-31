@@ -36,7 +36,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
         return usuarioRepository.buscarUsuario(usuario);
     }
 
-    public List<Usuario> busquedaUsu(String busqueda, int est){
+    public List<Usuario> busquedaUsu(String busqueda, int est) {
         return usuarioRepository.busquedaU(busqueda, est);
     }
 
@@ -48,5 +48,9 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
         } else {
             return false;
         }
+    }
+
+    public List<Usuario> listarUsu(int est) {
+        return usuarioRepository.listarUsu(est);
     }
 }

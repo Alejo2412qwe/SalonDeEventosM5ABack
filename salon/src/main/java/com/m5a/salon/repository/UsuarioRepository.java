@@ -22,6 +22,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query(value = "SELECT * FROM usuario WHERE usu_nombre_usuario = :usuario", nativeQuery = true)
     Usuario buscarUsuario(@Param("usuario") String usuario);
 
+    @Query(value = "SELECT * FROM usuario WHERE usu_estado= :est", nativeQuery = true)
+    List<Usuario> listarUsu(@Param("est") int est);
+
     @Query(value = "SELECT u.* "
             + "FROM usuario u "
             + "JOIN persona p ON u.usu_per_id = p.per_id "
@@ -34,7 +37,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
             + "       OR LOWER(r.rol_nombre) LIKE CONCAT('%', :busqueda, '%') "
             + "      )", nativeQuery = true)
     List<Usuario> busquedaU(@Param("busqueda") String busqueda, @Param("est") int est);
- 
+
     @Query(value = "SELECT * FROM usuario WHERE usu_nombre_usuario = :usuario AND usu_contrasena = :password", nativeQuery = true)
     public Usuario login(@Param("usuario") String usuario, @Param("password") String password);
 }

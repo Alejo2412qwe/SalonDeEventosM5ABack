@@ -45,7 +45,12 @@ public class UsuarioController {
 
     @GetMapping("/busqueda/{busqueda}/{est}")
     public ResponseEntity<List<Usuario>> busquedaUsuarios(@PathVariable String busqueda, @PathVariable int est) {
-        return new ResponseEntity<>(usuarioService.busquedaUsu(busqueda,est), HttpStatus.OK);
+        return new ResponseEntity<>(usuarioService.busquedaUsu(busqueda, est), HttpStatus.OK);
+    }
+
+    @GetMapping("/listar/{est}")
+    public ResponseEntity<List<Usuario>> listarUsuEst(@PathVariable int est) {
+        return new ResponseEntity<>(usuarioService.listarUsu(est), HttpStatus.OK);
     }
 
     //LOG IN

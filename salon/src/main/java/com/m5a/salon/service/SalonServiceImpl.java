@@ -32,8 +32,8 @@ public class SalonServiceImpl extends GenericServiceImpl<Salon, Integer> impleme
         return repository.buscarSalonPorID(id);
     }
 
-    public List<Salon> buscarSal(String busqueda) {
-        return repository.buscarSal(busqueda);
+    public List<Salon> buscarSal(String busqueda, int est) {
+        return repository.buscarSal(busqueda, est);
     }
 
     public List<Salon> listarEstado(int est) {
