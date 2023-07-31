@@ -64,8 +64,8 @@ public class SalonApplication implements CommandLineRunner {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        mailSender.setUsername("bryancurillo2002@gmail.com"); // Coloca tu correo de Gmail aquí
-        mailSender.setPassword("okvjcpvyjokebhdc"); // Coloca tu contraseña de Gmail aquí
+        mailSender.setUsername("perruncay@gmail.com"); // Coloca tu correo de Gmail aquí
+        mailSender.setPassword("kqmzhfizwzeofgve"); // Coloca tu contraseña de Gmail aquí
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
