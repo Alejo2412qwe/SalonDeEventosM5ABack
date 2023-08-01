@@ -16,7 +16,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface ReservaRepository extends JpaRepository<Reserva, Integer> {
 
-    @Query("SELECT r.resFechaEvento, r.reCotiId.cotiTipoEvento, r.resEstado, r.reCotiId.cotiMonto, r.reCotiId.salId.salNombre FROM Reserva r WHERE r.usuId.usuId = :userId")
+    @Query("SELECT r.resFechaEvento, r.reCotiId.cotiTipoEvento, r.resEstado, r.reCotiId.cotiMonto, r.reCotiId.salId.salNombre FROM Reserva r WHERE r.reCotiId.usuId.usuId = :userId")
     List<Object[]> findCustomReservasByUserId(@Param("userId") Long userId);
 
     @Query(value = "SELECT COUNT(*) "
